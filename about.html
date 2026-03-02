@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JMDH — About</title>
+  <meta name="description" content="José Manuel Diaz Herrera — Multidisciplinary Designer based in Buenos Aires">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Space+Grotesk:wght@400;700&family=Inter:wght@400;500&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="icon" type="image/jpeg" href="Fotos/NavBar.png">
+  <link rel="apple-touch-icon" href="Fotos/NavBar.png">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar--home">
+    <a href="index.html" class="navbar__name">José Manuel Diaz Herrera</a>
+    <div class="navbar__right">
+      <div class="navbar__links">
+        <a href="index.html" class="navbar__link" data-i18n="nav-home">HOME</a>
+        <a href="about.html" class="navbar__link active" data-i18n="nav-about">ABOUT</a>
+        <a href="projects.html" class="navbar__link" data-i18n="nav-projects">PROJECTS</a>
+        <a href="play.html" class="navbar__link" data-i18n="nav-play">PLAY</a>
+      </div>
+      <button class="lang-toggle" aria-label="Switch to Spanish">ES</button>
+      <a href="contact.html" class="btn-cta" data-i18n="nav-cta">GET IN TOUCH</a>
+    </div>
+    <button class="navbar__hamburger" aria-label="Menu" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="navbar__mobile-menu" id="mobile-menu">
+    <a href="index.html" class="navbar__link" data-i18n="nav-home">HOME</a>
+    <a href="about.html" class="navbar__link active" data-i18n="nav-about">ABOUT</a>
+    <a href="projects.html" class="navbar__link" data-i18n="nav-projects">PROJECTS</a>
+    <a href="play.html" class="navbar__link" data-i18n="nav-play">PLAY</a>
+    <a href="contact.html" class="navbar__link" data-i18n="nav-contact">CONTACT</a>
+    <button class="lang-toggle lang-toggle--mobile" aria-label="Switch to Spanish">ES</button>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="about-wrapper">
+    <!-- Hero — sticky: photo + quote side by side, full width -->
+    <div class="about-hero">
+      <div class="about-hero__left">
+        <img src="Fotos/fotofacha.jpeg" alt="José Manuel Diaz Herrera">
+      </div>
+      <div class="about-hero__right">
+        <div class="about-quote-wrap">
+          <p class="about-label" data-i18n="about-label">About</p>
+          <blockquote class="about-quote" data-i18n="about-bio-1">
+            I strongly believe that design is an area for empathizing with others, being able to move them emotionally in the same way it moves me. To convey and communicate ideas.
+          </blockquote>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bio + Disciplines — scroll over the sticky hero -->
+    <div class="about-below">
+      <div class="about-bio">
+        <div class="about-bio__section">
+          <h2 class="about-bio__title" data-i18n="about-bio-title-1">Education</h2>
+          <p data-i18n="about-bio-2a">
+            I am a designer based in Buenos Aires, with a Bachelor's degree in Design from Universidad Torcuato Di Tella. My academic formation was instrumental in shaping my comprehensive understanding of the discipline, teaching me to approach complex problems with a strategic mindset and deep user empathy. This foundation allows me to tackle challenges by truly thinking like a designer, looking beyond aesthetics to find functional solutions.
+          </p>
+          <p data-i18n="about-bio-2b">
+            Throughout my studies, I expanded my creative horizons, moving beyond traditional boundaries to cultivate a strong passion for industrial design, digital communication, and the creation of multimedia objects.
+          </p>
+        </div>
+        <div class="about-bio__section">
+          <h2 class="about-bio__title" data-i18n="about-bio-title-2">Career</h2>
+          <p data-i18n="about-bio-3a">
+            Complementing my academic background, I have gained professional experience working as a Community Manager and Graphic Designer since 2024. These roles have allowed me to dive deep into the digital landscape, mastering the nuances of social media dynamics and the art of community building.
+          </p>
+          <p data-i18n="about-bio-3b">
+            This combination of theoretical knowledge and practical application enables me to bridge the gap between physical design and digital interaction, delivering visual solutions that not only solve problems but also resonate effectively with audiences in an increasingly connected world.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-disciplines">
+        <p class="about-disciplines__label" data-i18n="disciplines-label">Disciplines</p>
+        <ul class="about-disciplines__list">
+          <li class="about-disciplines__item" data-i18n="disc-industrial">Industrial Design</li>
+          <li class="about-disciplines__item" data-i18n="disc-3d">3D Design</li>
+          <li class="about-disciplines__item" data-i18n="disc-product">Product Design</li>
+          <li class="about-disciplines__item" data-i18n="disc-game">Game Design</li>
+          <li class="about-disciplines__item" data-i18n="disc-comm">Communication Design</li>
+          <li class="about-disciplines__item" data-i18n="disc-digital">Digital Design</li>
+          <li class="about-disciplines__item" data-i18n="disc-ia">IA Design</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-grid">
+    <div class="footer-grid__col footer-grid__col--left">
+      <a href="index.html" class="footer-navlink" data-i18n="nav-home">HOME</a>
+      <a href="about.html" class="footer-navlink" data-i18n="nav-about">ABOUT</a>
+      <a href="projects.html" class="footer-navlink" data-i18n="nav-projects">PROJECTS</a>
+      <a href="play.html" class="footer-navlink" data-i18n="nav-play">PLAY</a>
+    </div>
+    <div class="footer-grid__col footer-grid__col--center">
+      <p class="footer-brand-name">José Manuel Diaz Herrera</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" class="footer-social" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
+        <a href="#" class="footer-social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+      <p class="footer-tagline" data-i18n="footer-tagline">MULTIDISCIPLINARY DESIGNER</p>
+    </div>
+    <div class="footer-grid__col footer-grid__col--right">
+      <a href="contact.html" class="footer-navlink" data-i18n="nav-contact">CONTACT</a>
+      <a href="link-in-bio.html" class="footer-navlink" data-i18n="nav-link-bio">LINK IN BIO</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+</body>
+</html>

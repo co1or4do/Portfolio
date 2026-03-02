@@ -1,0 +1,65 @@
+{
+  "site": {
+    "name": "josediazherrera.site",
+    "owner": {
+      "name": "José Manuel Diaz Herrera",
+      "role": "Multidisciplinary designer",
+      "location": "Buenos Aires, Argentina",
+      "specialties": ["3D", "communication design", "digital design"]
+    },
+    "positioning": {
+      "type": "personal portfolio",
+      "tone": "minimalist, conceptual, design-focused"
+    },
+    "navigation": ["Home", "About", "Projects", "Get in touch"],
+    "global_cta": ["Let's Collaborate", "Get in touch"]
+  },
+
+  "pages": {
+    "home": {
+      "hero": "Hi :) I'm José, a designer based in Buenos Aires, Argentina. I specialize in 3D, communication and digital design.",
+      "projects_preview": ["Savia", "PLEXA", "Patagón"],
+      "cta": ["Let's Collaborate", "Get in touch"]
+    },
+
+    "about": {
+      "philosophy": [
+        "I strongly believe that design is an area for empathizing with others, being able to move them emotionally in the same way it moves me.",
+        "To convey and communicate ideas."
+      ],
+      "academic_background": "I am a designer based in Buenos Aires, with a Bachelor's degree in Design from Universidad Torcuato Di Tella. My academic formation was instrumental in shaping my comprehensive understanding of the discipline, teaching me to approach complex problems with a strategic mindset and deep user empathy. This foundation allows me to tackle challenges by truly thinking like a designer, looking beyond aesthetics to find functional solutions. Throughout my studies, I expanded my creative horizons, moving beyond traditional boundaries to cultivate a strong passion for industrial design, digital communication, and the creation of multimedia objects.",
+      "working_experience": "Complementing my academic background, I have gained professional experience working as a Community Manager and Graphic Designer since 2024. These roles have allowed me to dive deep into the digital landscape, mastering the nuances of social media dynamics and the art of community building. This combination of theoretical knowledge and practical application enables me to bridge the gap between physical design and digital interaction, delivering visual solutions that not only solve problems but also resonate effectively with audiences in an increasingly connected world."
+    },
+
+    "projects": {
+      "savia": {
+        "intro": "A modular urban furniture set centered on the relationship between public space, workers and nature. The structure utilizes a pipe-based construction system that encourages spontaneous vegetation growth, blurring the line between industrial design and the natural landscape.",
+        "overview": "In this project, I served as the 3D Designer. I was responsible for the conceptualization, modeling, rendering, and finishing of the pieces. The urban furniture set includes ischiatic supports, benches, and tables, featuring a pipe-based construction system designed to allow nature to grow through it while connecting the various components to create different spatial configurations.",
+        "web_configurator": "Finally, I developed a web configurator that allows anyone to explore our system. Users can assemble different parts and create their own custom configurations, bringing the modular system to life.",
+        "partner": "Elisa Cipriani"
+      },
+
+      "plexa": {
+        "intro": "Designed as a study of contrasts, PLEXA bridges the gap between the rigidity of exact sciences and the fluidity of soft disciplines, like design.",
+        "overview": "In this collaborative project, I served as the Technical Lead. My focus was on structural feasibility, including load calculations and dimensional analysis. I designed and 3D-modeled the white connecting nodes —printed in PETG— which act as both structural joints and aesthetic elements. I also oversaw the fabrication of the 'Palo Blanco' wood rods, which were turned for precision assembly and finished with linseed oil. The seat and backrest feature polycarbonate panels mounted via glass standoffs.",
+        "team_members": ["Julián Leiss", "Bautista Ausqui", "Matías Cornara"]
+      },
+
+      "ccr": {
+        "intro": "CCR+ is an app for connecting young people, artists, and people living in community.",
+        "overview": null
+      },
+
+      "patagon": {
+        "intro": "Strategy board game combining area control and resource management mechanics. It takes place in a whimsical, stylized medieval world.",
+        "overview": "This was a collaborative project where tasks were shared equally between both team members. Together, we handled the conceptualization, rule-setting, and the full illustration of the board, characters, and environments. The final result is a 4-player game featuring an MDF board, custom player tokens, and four distinct card decks—each with its own unique illustrations. The game is set in a humorous, stylized version of the Argentine Patagonia.",
+        "partner": "Ramiro Gallo"
+      },
+
+      "herbario": {
+        "intro": "A personal project dedicated to Natalia Lafourcade. This work draws inspiration from her career, creative processes, and life story, all of which are deeply rooted in a profound connection with nature.",
+        "overview": "Herbario is a fanzine that chronicles the musical journey of Mexican artist Natalia Lafourcade. Through a blend of acrylic illustrations and digital post-processing, the project seeks to convey her deep-rooted connection with the natural world."
+      }
+    }
+  }
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JMDH — Play</title>
+  <meta name="description" content="José Manuel Diaz Herrera — Playground">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Space+Grotesk:wght@400;700&family=Inter:wght@400;500&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="icon" type="image/jpeg" href="Fotos/NavBar.png">
+  <link rel="apple-touch-icon" href="Fotos/NavBar.png">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar--home">
+    <a href="index.html" class="navbar__name">José Manuel Diaz Herrera</a>
+    <div class="navbar__right">
+      <div class="navbar__links">
+        <a href="index.html" class="navbar__link" data-i18n="nav-home">HOME</a>
+        <a href="about.html" class="navbar__link" data-i18n="nav-about">ABOUT</a>
+        <a href="projects.html" class="navbar__link" data-i18n="nav-projects">PROJECTS</a>
+        <a href="play.html" class="navbar__link active" data-i18n="nav-play">PLAY</a>
+      </div>
+      <button class="lang-toggle" aria-label="Switch to Spanish">ES</button>
+      <a href="contact.html" class="btn-cta" data-i18n="nav-cta">GET IN TOUCH</a>
+    </div>
+    <button class="navbar__hamburger" aria-label="Menu" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="navbar__mobile-menu" id="mobile-menu">
+    <a href="index.html" class="navbar__link" data-i18n="nav-home">HOME</a>
+    <a href="about.html" class="navbar__link" data-i18n="nav-about">ABOUT</a>
+    <a href="projects.html" class="navbar__link" data-i18n="nav-projects">PROJECTS</a>
+    <a href="play.html" class="navbar__link active" data-i18n="nav-play">PLAY</a>
+    <a href="contact.html" class="navbar__link" data-i18n="nav-contact">CONTACT</a>
+    <button class="lang-toggle lang-toggle--mobile" aria-label="Switch to Spanish">ES</button>
+  </div>
+
+  <!-- PLAY HUB -->
+  <section class="play-hub">
+    <div class="play-hub__layout">
+      <div class="play-hub__info">
+        <p class="play-label" data-i18n="play-label">PLAYGROUND</p>
+        <h1 class="play-title" data-i18n="play-title">Play</h1>
+        <p class="play-subtitle" data-i18n="play-subtitle">Pick a game and have fun.</p>
+      </div>
+      <div class="play-hub__grid" id="play-hub">
+        <button class="play-card" data-game="snake">
+          <span class="play-card__icon">✳</span>
+          <span class="play-card__name" data-i18n="play-snake">SNAKE</span>
+          <span class="play-card__desc" data-i18n="play-snake-desc">Eat, grow, don't crash.</span>
+        </button>
+        <button class="play-card" data-game="memory">
+          <span class="play-card__icon">◆</span>
+          <span class="play-card__name" data-i18n="play-memory">MEMORY</span>
+          <span class="play-card__desc" data-i18n="play-memory-desc">Find every pair.</span>
+        </button>
+        <button class="play-card" data-game="runner">
+          <span class="play-card__icon">▲</span>
+          <span class="play-card__name" data-i18n="play-runner">RUNNER</span>
+          <span class="play-card__desc" data-i18n="play-runner-desc">Run, jump, survive.</span>
+        </button>
+        <button class="play-card" data-game="pong">
+          <span class="play-card__icon">▮</span>
+          <span class="play-card__name" data-i18n="play-pong">PONG</span>
+          <span class="play-card__desc" data-i18n="play-pong-desc">Classic paddle battle.</span>
+        </button>
+        <button class="play-card" data-game="breakout">
+          <span class="play-card__icon">■</span>
+          <span class="play-card__name" data-i18n="play-breakout">BREAKOUT</span>
+          <span class="play-card__desc" data-i18n="play-breakout-desc">Smash every brick.</span>
+        </button>
+        <button class="play-card" data-game="tictactoe">
+          <span class="play-card__icon">╋</span>
+          <span class="play-card__name" data-i18n="play-ttt">TIC TAC TOE</span>
+          <span class="play-card__desc" data-i18n="play-ttt-desc">Beat the machine.</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Game arena (hidden until game selected) -->
+    <div class="play-arena" id="play-arena" hidden>
+      <div class="play-arena__modal">
+        <div class="play-arena__bar">
+          <span class="play-arena__info" id="play-info"></span>
+          <button class="play-arena__close" id="play-back" aria-label="Close">&#10005;</button>
+        </div>
+        <div class="play-arena__stage" id="play-stage"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-grid">
+    <div class="footer-grid__col footer-grid__col--left">
+      <a href="index.html" class="footer-navlink" data-i18n="nav-home">HOME</a>
+      <a href="about.html" class="footer-navlink" data-i18n="nav-about">ABOUT</a>
+      <a href="projects.html" class="footer-navlink" data-i18n="nav-projects">PROJECTS</a>
+      <a href="play.html" class="footer-navlink" data-i18n="nav-play">PLAY</a>
+    </div>
+    <div class="footer-grid__col footer-grid__col--center">
+      <p class="footer-brand-name">José Manuel Diaz Herrera</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" class="footer-social" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
+        <a href="#" class="footer-social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+      <p class="footer-tagline" data-i18n="footer-tagline">MULTIDISCIPLINARY DESIGNER</p>
+    </div>
+    <div class="footer-grid__col footer-grid__col--right">
+      <a href="contact.html" class="footer-navlink" data-i18n="nav-contact">CONTACT</a>
+      <a href="link-in-bio.html" class="footer-navlink" data-i18n="nav-link-bio">LINK IN BIO</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/play.js"></script>
+  <script src="js/i18n.js"></script>
+</body>
+</html>

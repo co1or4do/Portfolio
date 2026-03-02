@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JMDH — Home</title>
+  <meta name="description" content="José Manuel Diaz Herrera — Multidisciplinary Designer based in Buenos Aires, Argentina.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="icon" type="image/jpeg" href="Fotos/NavBar.png">
+  <link rel="apple-touch-icon" href="Fotos/NavBar.png">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar--home">
+    <a href="index.html" class="navbar__name">José Manuel Diaz Herrera</a>
+    <div class="navbar__right">
+      <div class="navbar__links">
+        <a href="index.html" class="navbar__link active" data-i18n="nav-home">HOME</a>
+        <a href="about.html" class="navbar__link" data-i18n="nav-about">ABOUT</a>
+        <a href="projects.html" class="navbar__link" data-i18n="nav-projects">PROJECTS</a>
+        <a href="play.html" class="navbar__link" data-i18n="nav-play">PLAY</a>
+      </div>
+      <button class="lang-toggle" aria-label="Switch to Spanish">ES</button>
+      <a href="contact.html" class="btn-cta" data-i18n="nav-cta">GET IN TOUCH</a>
+    </div>
+    <button class="navbar__hamburger" aria-label="Menú" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="navbar__mobile-menu" id="mobile-menu">
+    <a href="index.html" class="navbar__link" data-i18n="nav-home">HOME</a>
+    <a href="about.html" class="navbar__link" data-i18n="nav-about">ABOUT</a>
+    <a href="projects.html" class="navbar__link" data-i18n="nav-projects">PROJECTS</a>
+    <a href="play.html" class="navbar__link" data-i18n="nav-play">PLAY</a>
+    <a href="contact.html" class="navbar__link" data-i18n="nav-contact">CONTACT</a>
+    <button class="lang-toggle lang-toggle--mobile" aria-label="Switch to Spanish">ES</button>
+  </div>
+
+  <!-- HERO (split layout) -->
+  <section class="hero-split">
+    <div class="hero-split__left">
+      <span class="hero-badge" data-i18n="hero-badge">MULTIDISCIPLINARY DESIGNER</span>
+      <h1 class="hero-title" data-i18n="hero-title">Hi :)</h1>
+      <p class="hero-desc" data-i18n="hero-desc">I'm José, a designer based in Buenos Aires, Argentina. I specialize in 3D, communication and digital design.</p>
+      <a href="contact.html" class="btn-cta" data-i18n="nav-cta">GET IN TOUCH</a>
+    </div>
+    <div class="hero-split__right">
+      <img src="Fotos/FotodePerfil.jpeg" alt="José Manuel Diaz Herrera">
+      <div class="asterisk-grid__cells asterisk-grid__cells--hero"></div>
+    </div>
+  </section>
+
+  <!-- ASTERISK GRID -->
+  <section class="asterisk-grid" aria-hidden="true">
+    <img src="Fotos/CC.jpeg" alt="" class="asterisk-grid__bg">
+    <div class="asterisk-grid__cells"></div>
+  </section>
+
+  <!-- LATEST PROJECTS -->
+  <section class="latest-projects">
+    <div class="container">
+      <p class="section-tag" data-i18n="section-projects">PROJECTS</p>
+      <h2 class="latest-title" data-i18n="latest-title">Latest projects</h2>
+    </div>
+
+    <div class="carousel">
+      <button class="carousel__arrow carousel__arrow--prev" aria-label="Proyecto anterior">&#8592;</button>
+
+      <div class="carousel__viewport">
+        <div class="carousel__track">
+
+          <div class="carousel__slide">
+            <a href="projects/patagon.html" class="latest-card">
+              <div class="latest-card__img-wrap">
+                <img src="Patagón/Tapa.jpg" alt="Patagón">
+              </div>
+              <span class="latest-card__name"><span class="latest-card__label">PATAGÓN</span><span class="latest-card__arrow" aria-hidden="true">→</span></span>
+            </a>
+          </div>
+
+          <div class="carousel__slide">
+            <a href="projects/savia.html" class="latest-card">
+              <div class="latest-card__img-wrap">
+                <img src="Savia/a ver que ondi.png" alt="Savia">
+              </div>
+              <span class="latest-card__name"><span class="latest-card__label">SAVIA</span><span class="latest-card__arrow" aria-hidden="true">→</span></span>
+            </a>
+          </div>
+
+          <div class="carousel__slide">
+            <a href="projects/plexa.html" class="latest-card">
+              <div class="latest-card__img-wrap">
+                <img src="Plexa/LED_Mobiliario_2025_1erSem_Ausqui_Cabrera_Diaz Herrera_Leiss_%232.jpg" alt="Plexa">
+              </div>
+              <span class="latest-card__name"><span class="latest-card__label">PLEXA</span><span class="latest-card__arrow" aria-hidden="true">→</span></span>
+            </a>
+          </div>
+
+          <div class="carousel__slide">
+            <a href="projects/ccr.html" class="latest-card">
+              <div class="latest-card__img-wrap">
+                <img src="CCR/PORTADA.jpg" alt="CCR+">
+              </div>
+              <span class="latest-card__name"><span class="latest-card__label">CCR+</span><span class="latest-card__arrow" aria-hidden="true">→</span></span>
+            </a>
+          </div>
+
+          <div class="carousel__slide">
+            <a href="projects/herbario.html" class="latest-card">
+              <div class="latest-card__img-wrap">
+                <img src="Herbario/Mockup.jpg" alt="Herbario">
+              </div>
+              <span class="latest-card__name"><span class="latest-card__label">HERBARIO</span><span class="latest-card__arrow" aria-hidden="true">→</span></span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="carousel__arrow carousel__arrow--next" aria-label="Proyecto siguiente">&#8594;</button>
+    </div>
+  </section>
+
+  <!-- LET'S COLLABORATE -->
+  <section class="collab-section">
+    <h2 class="collab-title" data-i18n="collab-title">Let's Collaborate</h2>
+    <a href="contact.html" class="btn-cta" data-i18n="nav-cta">GET IN TOUCH</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-grid">
+    <div class="footer-grid__col footer-grid__col--left">
+      <a href="index.html" class="footer-navlink" data-i18n="nav-home">HOME</a>
+      <a href="about.html" class="footer-navlink" data-i18n="nav-about">ABOUT</a>
+      <a href="projects.html" class="footer-navlink" data-i18n="nav-projects">PROJECTS</a>
+      <a href="play.html" class="footer-navlink" data-i18n="nav-play">PLAY</a>
+    </div>
+    <div class="footer-grid__col footer-grid__col--center">
+      <p class="footer-brand-name">José Manuel Diaz Herrera</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" class="footer-social" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
+        <a href="#" class="footer-social" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+      <p class="footer-tagline" data-i18n="footer-tagline">MULTIDISCIPLINARY DESIGNER</p>
+    </div>
+    <div class="footer-grid__col footer-grid__col--right">
+      <a href="contact.html" class="footer-navlink" data-i18n="nav-contact">CONTACT</a>
+      <a href="link-in-bio.html" class="footer-navlink" data-i18n="nav-link-bio">LINK IN BIO</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/hero-animations.js"></script>
+</body>
+</html>

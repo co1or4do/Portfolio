@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JMDH — Links</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Space+Grotesk:wght@400;700&family=Inter:wght@400;500&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="icon" type="image/jpeg" href="Fotos/NavBar.png">
+  <link rel="apple-touch-icon" href="Fotos/NavBar.png">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar--home">
+    <a href="index.html" class="navbar__name">José Manuel Diaz Herrera</a>
+    <div class="navbar__right">
+      <div class="navbar__links">
+        <a href="index.html" class="navbar__link" data-i18n="nav-home">HOME</a>
+        <a href="about.html" class="navbar__link" data-i18n="nav-about">ABOUT</a>
+        <a href="projects.html" class="navbar__link" data-i18n="nav-projects">PROJECTS</a>
+        <a href="play.html" class="navbar__link" data-i18n="nav-play">PLAY</a>
+      </div>
+      <button class="lang-toggle" aria-label="Switch to Spanish">ES</button>
+      <a href="contact.html" class="btn-cta" data-i18n="nav-cta">GET IN TOUCH</a>
+    </div>
+    <button class="navbar__hamburger" aria-label="Menu" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="navbar__mobile-menu" id="mobile-menu">
+    <a href="index.html" class="navbar__link" data-i18n="nav-home">HOME</a>
+    <a href="about.html" class="navbar__link" data-i18n="nav-about">ABOUT</a>
+    <a href="projects.html" class="navbar__link" data-i18n="nav-projects">PROJECTS</a>
+    <a href="play.html" class="navbar__link" data-i18n="nav-play">PLAY</a>
+    <a href="contact.html" class="navbar__link" data-i18n="nav-contact">CONTACT</a>
+    <button class="lang-toggle lang-toggle--mobile" aria-label="Switch to Spanish">ES</button>
+  </div>
+
+  <!-- LINK IN BIO -->
+  <section class="linkinbio-section">
+    <div class="linkinbio-inner">
+
+      <div class="linkinbio-avatar">
+        <img src="Fotos/FotodePerfil.jpeg" alt="JMDH">
+      </div>
+
+      <p class="linkinbio-name">José Manuel Diaz Herrera</p>
+      <p class="linkinbio-handle" data-i18n="bio-handle">Industrial Designer</p>
+
+      <div class="linkinbio-links">
+        <a href="index.html" class="linkinbio-link">Portfolio</a>
+        <a href="projects.html" class="linkinbio-link" data-i18n="bio-link-projects">Projects</a>
+        <a href="mailto:colodiazherrera@gmail.com" class="linkinbio-link">Email</a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener" class="linkinbio-link">Instagram</a>
+        <a href="https://linkedin.com/in/" target="_blank" rel="noopener" class="linkinbio-link">LinkedIn</a>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+</body>
+</html>
