@@ -18,6 +18,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+picture {
+  display: contents;
+}
+
 img, video {
   display: block;
   max-width: 100%;

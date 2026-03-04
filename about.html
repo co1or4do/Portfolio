@@ -53,7 +53,10 @@
     <!-- Hero — sticky: photo + quote side by side, full width -->
     <div class="about-hero">
       <div class="about-hero__left">
-        <img src="Fotos/fotofacha.jpeg" alt="José Manuel Diaz Herrera">
+        <picture>
+              <source srcset="Fotos/fotofacha.webp" type="image/webp">
+              <img src="Fotos/fotofacha.jpeg" alt="José Manuel Diaz Herrera" width="1200" height="1200">
+            </picture>
       </div>
       <div class="about-hero__right">
         <div class="about-quote-wrap">
@@ -126,7 +129,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/i18n.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/i18n.js"></script>
 </body>
 </html>
