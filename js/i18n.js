@@ -71,7 +71,8 @@ const translations = {
     'savia-area':        'Industrial Design',
     'savia-desc-1':      'A modular urban furniture set centered on the relationship between public space, workers and nature. The structure utilizes a pipe-based construction system that encourages spontaneous vegetation growth, blurring the line between industrial design and the natural landscape.',
     'savia-desc-2':      'In this project, I served as the 3D Designer. I was responsible for the conceptualization, modeling, rendering, and finishing of the pieces. The urban furniture set includes ischiatic supports, benches, and tables, featuring a pipe-based construction system designed to allow nature to grow through it while connecting the various components to create different spatial configurations.',
-    'savia-desc-3':      'Finally, I developed a web configurator that allows anyone to explore our system. Users can assemble different parts and create their own custom configurations, bringing the modular system to life.',
+    'savia-heading-3':   'Web configurator',
+    'savia-desc-3':      'Finally, I developed a <a href="https://configurador-savia-git-main-co1or4dos-projects.vercel.app/" target="_blank" rel="noopener noreferrer">web configurator</a> that allows anyone to explore our system. Users can assemble different parts and create their own custom configurations, bringing the modular system to life.',
     'savia-img-label':   'Images',
     'savia-coming-soon': 'Coming Soon',
 
@@ -197,7 +198,8 @@ const translations = {
     'savia-area':        'Diseño Industrial',
     'savia-desc-1':      'Un conjunto de mobiliario urbano modular centrado en la relación entre el espacio público, las personas y la naturaleza. La estructura utiliza un sistema constructivo de caños que favorece el crecimiento espontáneo de vegetación, desdibujando el límite entre el diseño industrial y el paisaje natural.',
     'savia-desc-2':      'En este proyecto, fui el Diseñador 3D. Me encargué de la conceptualización, el modelado, el renderizado y el acabado de las piezas. El conjunto de mobiliario urbano incluye apoyaisquiones, bancos y mesas, con un sistema constructivo de caños diseñado para que la naturaleza crezca a través de él mientras conecta los distintos componentes para crear diferentes configuraciones espaciales.',
-    'savia-desc-3':      'Finalmente, desarrollé un configurador web que permite a cualquier persona explorar nuestro sistema. Los usuarios pueden ensamblar distintas piezas y crear sus propias configuraciones personalizadas, dándole vida al sistema modular.',
+    'savia-heading-3':   'Configurador web',
+    'savia-desc-3':      'Finalmente, desarrollé un <a href="https://configurador-savia-git-main-co1or4dos-projects.vercel.app/" target="_blank" rel="noopener noreferrer">configurador web</a> que permite a cualquier persona explorar nuestro sistema. Los usuarios pueden ensamblar distintas piezas y crear sus propias configuraciones personalizadas, dándole vida al sistema modular.',
     'savia-img-label':   'Imágenes',
     'savia-coming-soon': 'Próximamente',
 
@@ -267,7 +269,7 @@ function applyTranslations(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) {
-      el.textContent = t[key];
+      el.innerHTML = t[key];
     }
   });
 

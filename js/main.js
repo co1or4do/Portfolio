@@ -1,4 +1,117 @@
 // ============================================
+// NAVBAR NAME — glitch hover → "Colo"
+// ============================================
+
+(function () {
+  const nameEl = document.querySelector('.navbar__name');
+  if (!nameEl) return;
+
+  const originalText = nameEl.textContent;
+  const targetText = 'Colo';
+  const glyphPool = '!@#$%&*?¿¡~^÷±§∆∑µ√∞≠<>{}[]|/\\';
+  const GLITCH_FRAMES = 2;    // glitch cycles per char before it disappears/appears
+  const FRAME_MS = 18;        // ms per glitch frame
+  const CHAR_STAGGER = 14;    // ms between each character starting
+
+  let cancelFlag = false;
+  let restoreTimer = null;
+
+  function randomGlyph() {
+    return glyphPool[Math.floor(Math.random() * glyphPool.length)];
+  }
+
+  // Phase 1: eat text right-to-left, char by char becomes glitch then blank
+  // Phase 2: write new text left-to-right, blank becomes glitch then final char
+  function glitchTransition(fromText, toText, onDone) {
+    cancelFlag = false;
+    const display = fromText.split('');
+    let pending = 0;
+
+    // --- Phase 1: consume from right to left ---
+    const len = display.length;
+    pending = len;
+
+    for (let k = 0; k < len; k++) {
+      const i = len - 1 - k; // right to left index
+      const startDelay = k * CHAR_STAGGER;
+
+      setTimeout(() => {
+        if (cancelFlag) return;
+        let frame = 0;
+
+        function eat() {
+          if (cancelFlag) return;
+          frame++;
+          if (frame <= GLITCH_FRAMES) {
+            display[i] = randomGlyph();
+            nameEl.textContent = display.join('').trimEnd();
+            setTimeout(eat, FRAME_MS);
+          } else {
+            display[i] = '';
+            nameEl.textContent = display.join('').trimEnd() || '\u00A0';
+            pending--;
+            if (pending === 0) startPhase2();
+          }
+        }
+
+        eat();
+      }, startDelay);
+    }
+
+    // --- Phase 2: build new text left to right ---
+    function startPhase2() {
+      if (cancelFlag) return;
+      const target = toText.split('');
+      const build = new Array(target.length).fill('');
+      let pending2 = target.length;
+
+      for (let k = 0; k < target.length; k++) {
+        const startDelay = k * CHAR_STAGGER;
+
+        setTimeout(() => {
+          if (cancelFlag) return;
+          let frame = 0;
+
+          function write() {
+            if (cancelFlag) return;
+            frame++;
+            if (frame <= GLITCH_FRAMES) {
+              build[k] = randomGlyph();
+              nameEl.textContent = build.join('').trimEnd();
+              setTimeout(write, FRAME_MS);
+            } else {
+              build[k] = target[k];
+              nameEl.textContent = build.join('').trimEnd();
+              pending2--;
+              if (pending2 === 0) {
+                nameEl.textContent = toText;
+                if (onDone) onDone();
+              }
+            }
+          }
+
+          write();
+        }, startDelay);
+      }
+    }
+  }
+
+  nameEl.addEventListener('mouseenter', () => {
+    clearTimeout(restoreTimer);
+    cancelFlag = true;
+    setTimeout(() => glitchTransition(nameEl.textContent, targetText), 10);
+  });
+
+  nameEl.addEventListener('mouseleave', () => {
+    clearTimeout(restoreTimer);
+    cancelFlag = true;
+    restoreTimer = setTimeout(() => {
+      glitchTransition(nameEl.textContent, originalText);
+    }, 200);
+  });
+})();
+
+// ============================================
 // MOBILE MENU TOGGLE
 // ============================================
 
@@ -54,18 +167,28 @@ document.querySelectorAll('.navbar__link').forEach(link => {
   document.body.appendChild(cursor);
 
   const glyph = cursor.querySelector('.custom-cursor__glyph');
-  let lastHovered = null;
-  let totalAngle = 0;
 
   // Lerp-based smooth cursor movement
   let mouseX = -100, mouseY = -100;
   let curX = -100, curY = -100;
   const ease = 0.15;
 
+  // Movement-based rotation
+  let prevMouseX = null;
+  let targetVelocity = 0;
+  let smoothVelocity = 0;
+  let rotationAngle = 0;
+
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     cursor.classList.add('is-active');
+
+    // Track horizontal velocity for rotation
+    if (prevMouseX !== null) {
+      targetVelocity = e.clientX - prevMouseX;
+    }
+    prevMouseX = e.clientX;
 
     // Invert cursor color over images and dark backgrounds
     const el = document.elementFromPoint(e.clientX, e.clientY);
@@ -80,27 +203,23 @@ document.querySelectorAll('.navbar__link').forEach(link => {
     curX += (mouseX - curX) * ease;
     curY += (mouseY - curY) * ease;
     cursor.style.transform = `translate(${curX}px, ${curY}px)`;
+
+    // Smooth velocity easing — lerp toward target, then decay target
+    smoothVelocity += (targetVelocity - smoothVelocity) * 0.06;
+    rotationAngle += smoothVelocity * 0.5;
+    targetVelocity *= 0.92;
+
+    glyph.style.transform = `translate(-50%, -50%) rotate(${rotationAngle}deg)`;
+
     requestAnimationFrame(animate);
   }
   animate();
 
-  document.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
-  document.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
-
-  // Rotate +90° each time a new interactive element is entered
-  const INTERACTIVE = 'a, button, [role="button"], .project-card, .gallery-item, .latest-card, .contact-item, input, textarea, select, label';
-
-  document.addEventListener('mouseover', (e) => {
-    const target = e.target.closest(INTERACTIVE);
-    if (target && target !== lastHovered) {
-      lastHovered = target;
-      totalAngle += 90;
-      glyph.style.transform = `translate(-50%, -50%) rotate(${totalAngle}deg)`;
-    }
-    if (!target) {
-      lastHovered = null;
-    }
+  document.addEventListener('mouseleave', () => {
+    cursor.classList.remove('is-active');
+    prevMouseX = null;
   });
+  document.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
 })();
 
 // ============================================
@@ -111,7 +230,7 @@ document.querySelectorAll('.navbar__link').forEach(link => {
   const grids = document.querySelectorAll('.asterisk-grid__cells');
   if (!grids.length) return;
 
-  const CELL_TARGET = 68;
+  const CELL_TARGET = window.innerWidth <= 743 ? 44 : 68;
   const SUPPRESS_RADIUS = 3;
 
   // Hover sound
@@ -358,13 +477,40 @@ document.querySelectorAll('.navbar__link').forEach(link => {
       if (rippleTimer) stopRipple();
     });
 
+    // --- MOBILE AUTO-PULSE ---
+    const isMobile = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let autoPulseTimer = null;
+
+    function autoPulse() {
+      if (!cells.length) return;
+      const idlePool = cells.filter(c => !c.classList.contains('is-gone') && !c.classList.contains('is-active') && !c._locked);
+      const count = Math.min(idlePool.length, 2 + Math.floor(Math.random() * 2));
+
+      for (let i = 0; i < count; i++) {
+        const idx = Math.floor(Math.random() * idlePool.length);
+        const cell = idlePool.splice(idx, 1)[0];
+        if (!cell) continue;
+
+        cell.classList.add('is-active');
+        setTimeout(() => {
+          cell.classList.remove('is-active');
+        }, 800 + Math.random() * 400);
+      }
+    }
+
+    function startAutoPulse() {
+      clearInterval(autoPulseTimer);
+      if (isMobile) autoPulseTimer = setInterval(autoPulse, 2500);
+    }
+
     // --- INIT ---
     build();
+    startAutoPulse();
 
     let resizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(build, 200);
+      resizeTimer = setTimeout(() => { build(); startAutoPulse(); }, 200);
     });
   });
 })();
@@ -446,7 +592,8 @@ document.querySelectorAll('.navbar__link').forEach(link => {
   const track    = carousel.querySelector('.carousel__track');
   const prevBtn  = carousel.querySelector('.carousel__arrow--prev');
   const nextBtn  = carousel.querySelector('.carousel__arrow--next');
-  const GAP = 28;
+  let cachedGap = parseFloat(getComputedStyle(track).gap) || 28;
+  function getGap() { return cachedGap; }
   const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';   // exponential deceleration
   const DURATION = 1.3;                              // seconds
 
@@ -481,7 +628,7 @@ document.querySelectorAll('.navbar__link').forEach(link => {
   });
 
   function cardW()    { return allSlides[0]?.offsetWidth || 400; }
-  function stepW()    { return cardW() + GAP; }
+  function stepW()    { return cardW() + getGap(); }
   function posFor(di) { return (viewport.offsetWidth - cardW()) / 2 - di * stepW(); }
 
   function setPos(di, animated) {
@@ -723,5 +870,5 @@ document.querySelectorAll('.navbar__link').forEach(link => {
 
   setPos(domIdx, false);
   refreshActive();
-  window.addEventListener('resize', () => setPos(domIdx, false));
+  window.addEventListener('resize', () => { cachedGap = parseFloat(getComputedStyle(track).gap) || 28; setPos(domIdx, false); });
 })();
