@@ -872,3 +872,41 @@ document.querySelectorAll('.navbar__link').forEach(link => {
   refreshActive();
   window.addEventListener('resize', () => { cachedGap = parseFloat(getComputedStyle(track).gap) || 28; setPos(domIdx, false); });
 })();
+
+// ============================================
+// LIGHTBOX — fullscreen image preview
+// ============================================
+(function () {
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox';
+  overlay.innerHTML = '<button class="lightbox__close" aria-label="Close">&times;</button><img class="lightbox__img" src="" alt="">';
+  document.body.appendChild(overlay);
+
+  const img = overlay.querySelector('.lightbox__img');
+  const closeBtn = overlay.querySelector('.lightbox__close');
+
+  function open(src, alt) {
+    img.src = src;
+    img.alt = alt || '';
+    requestAnimationFrame(() => overlay.classList.add('lightbox--open'));
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    overlay.classList.remove('lightbox--open');
+    document.body.style.overflow = '';
+  }
+
+  overlay.addEventListener('click', close);
+  closeBtn.addEventListener('click', close);
+  img.addEventListener('click', function (e) { e.stopPropagation(); close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+
+  document.querySelectorAll('.pd-gallery__item img, .pd-intro__right img').forEach(function (el) {
+    el.addEventListener('click', function () {
+      open(el.src, el.alt);
+    });
+  });
+})();
