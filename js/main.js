@@ -192,7 +192,7 @@ document.querySelectorAll('.navbar__link').forEach(link => {
 
     // Invert cursor color over images and dark backgrounds
     const el = document.elementFromPoint(e.clientX, e.clientY);
-    if (el && (el.tagName === 'IMG' || el.closest('.collab-section') || el.closest('.btn-cta'))) {
+    if (el && (el.tagName === 'IMG' || el.closest('.collab-section') || el.closest('.btn-cta') || el.closest('.carousel__arrow') || el.closest('.latest-card__arrow') || el.closest('.pieces-catalog__arrow'))) {
       cursor.classList.add('custom-cursor--inverted');
     } else {
       cursor.classList.remove('custom-cursor--inverted');
@@ -384,10 +384,6 @@ document.querySelectorAll('.navbar__link').forEach(link => {
       pick.classList.add('is-active');
       activated.add(pick);
 
-      // Sound slows down and fades as ripple expands
-      const progress = activated.size / MAX_ACTIVATED;
-      playSound(1.2 - progress * 0.8, 0.03);
-
       updateSuppression();
     }
 
@@ -407,7 +403,6 @@ document.querySelectorAll('.navbar__link').forEach(link => {
       suppressed.clear();
 
       collapsingBatch = [...batch];
-      const len = batch.length;
       batch.forEach((cell, i) => {
         setTimeout(() => {
           if (!collapsingBatch.includes(cell)) return; // already cleaned up
@@ -416,8 +411,6 @@ document.querySelectorAll('.navbar__link').forEach(link => {
           cell._locked = false;
           collapsingBatch.splice(collapsingBatch.indexOf(cell), 1);
 
-          const progress = (i + 1) / len;
-          playSound(0.4 + progress * 0.8, 0.03);
         }, i * 60);
       });
     }

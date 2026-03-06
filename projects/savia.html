@@ -101,7 +101,7 @@
       </aside>
       <div class="pd-prose">
         <p data-i18n="savia-desc-1">
-          A modular urban furniture set centered on the relationship between public space, workers and nature. The structure utilizes a pipe-based construction system that encourages spontaneous vegetation growth, blurring the line between industrial design and the natural landscape.
+          Modular urban furniture that explores the relationship between public space, people and nature. A pipe-based construction system that lets vegetation grow freely, blurring the line between the industrial and the natural.
         </p>
         <!-- SAVIA SLIDESHOW -->
         <div class="pd-slideshow">
@@ -129,7 +129,7 @@
           </div>
         </div>
         <p data-i18n="savia-desc-2">
-          In this project, I served as the 3D Designer. I was responsible for the conceptualization, modeling, rendering, and finishing of the pieces. The urban furniture set includes ischiatic supports, benches, and tables, featuring a pipe-based construction system designed to allow nature to grow through it while connecting the various components to create different spatial configurations.
+          I was the <span style="color:#9fd6db">3D Designer</span> on this project. I conceptualized, modeled, rendered and finished the pieces. The system includes ischiatic supports, benches and tables, connected by pipes through which nature grows and expands.
         </p>
 
         <!-- PIECES CATALOG -->
@@ -196,9 +196,18 @@
           <div class="pieces-catalog__dims"></div>
         </div>
 
+        <!-- MICRO-IMPLEMENTACIÓN + ETC -->
+        <div class="pd-micro-wrap">
+          <img src="../Savia/etc.png" alt="Savia — esquema técnico" class="pd-micro-wrap__bg" loading="lazy">
+          <figure class="pd-micro" id="micro-figure">
+            <img src="../Savia/micro.png" alt="Savia — Micro-implementación" loading="lazy">
+            <figcaption class="pd-micro__caption" id="micro-caption"></figcaption>
+          </figure>
+        </div>
+
         <h3 class="pd-prose__heading" data-i18n="savia-heading-3">Configurador web</h3>
         <p data-i18n="savia-desc-3">
-          Finally, I developed a <a href="https://configurador-savia-git-main-co1or4dos-projects.vercel.app/" target="_blank" rel="noopener noreferrer">web configurator</a> that allows anyone to explore our system. Users can assemble different parts and create their own custom configurations, bringing the modular system to life.
+          I also developed a <a href="https://configurador-savia-git-main-co1or4dos-projects.vercel.app/" target="_blank" rel="noopener noreferrer">web configurator</a> so anyone can explore the system, assemble pieces and build their own configuration.
         </p>
       </div>
     </div>
@@ -335,6 +344,38 @@
 
       // Init
       showPiece(0);
+    })();
+  </script>
+  <script>
+    (function () {
+      var figure = document.getElementById('micro-figure');
+      var caption = document.getElementById('micro-caption');
+      if (!figure || !caption) return;
+      var text = 'Micro-implementación';
+      var triggered = false;
+
+      function typewrite() {
+        caption.textContent = '';
+        var i = 0;
+        var timer = setInterval(function () {
+          i++;
+          caption.textContent = text.slice(0, i);
+          if (i >= text.length) clearInterval(timer);
+        }, 45);
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !triggered) {
+            triggered = true;
+            figure.classList.add('is-visible');
+            setTimeout(typewrite, 600);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(figure);
     })();
   </script>
 </body>

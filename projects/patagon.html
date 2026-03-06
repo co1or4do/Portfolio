@@ -104,32 +104,34 @@
           Strategy board game combining area control and resource management mechanics. It takes place in a whimsical, stylized medieval world.
         </p>
         <p data-i18n="patagon-desc-2">
-          This was a collaborative project where tasks were shared equally between both team members. Together, we handled the conceptualization, rule-setting, and the full illustration of the board, characters, and environments. The final result is a 4-player game featuring an MDF board, custom player tokens, and four distinct card decks—each with its own unique illustrations. The game is set in a humorous, stylized version of the Argentine Patagonia.
+          A collaborative project where we split everything equally. We handled conceptualization, rules, and the full illustration of the board, characters and environments.<br><br>The result: a 4-player game with an MDF board, custom tokens, and four card decks—each with its own illustrations. All set in a humorous, stylized Argentine Patagonia.
         </p>
-      </div>
-    </div>
-
-    <!-- GALLERY — mosaic layout -->
-    <div class="pd-gallery">
-      <!-- Row 1: half + half -->
-      <div class="pd-gallery__item pd-gallery__item--half" data-reveal>
-        <picture>
-              <source srcset="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__2.webp" type="image/webp">
-              <img src="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__2.jpg" alt="Patagón 2" loading="lazy" width="1200" height="1680">
-            </picture>
-      </div>
-      <div class="pd-gallery__item pd-gallery__item--half" data-reveal>
-        <picture>
-              <source srcset="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__3.webp" type="image/webp">
-              <img src="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__3.jpg" alt="Patagón 3" loading="lazy" width="1200" height="1680">
-            </picture>
-      </div>
-      <!-- Row 2: full width -->
-      <div class="pd-gallery__item pd-gallery__item--full" data-reveal>
-        <picture>
-              <source srcset="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__5.webp" type="image/webp">
-              <img src="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__5.jpg" alt="Patagón 5" loading="lazy" width="1920" height="2688">
-            </picture>
+        <!-- MANUAL -->
+        <div class="pd-manual-section" id="manual-section">
+          <button class="pd-manual-cover" id="open-manual" aria-label="Open game manual">
+            <img src="../Patagón/Manual/tapa.jpg" alt="Patagón Manual Cover" loading="lazy">
+          </button>
+          <p class="pd-manual-subtitle" id="manual-caption"></p>
+        </div>
+        <!-- GALLERY — placed in prose 4-col grid -->
+        <div class="col-1" data-reveal>
+          <picture>
+            <source srcset="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__2.webp" type="image/webp">
+            <img src="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__2.jpg" alt="Patagón 2" loading="lazy" width="1200" height="1680">
+          </picture>
+        </div>
+        <div class="col-2" data-reveal>
+          <picture>
+            <source srcset="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__3.webp" type="image/webp">
+            <img src="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__3.jpg" alt="Patagón 3" loading="lazy" width="1200" height="1680">
+          </picture>
+        </div>
+        <div class="col-2-4" data-reveal style="max-width:75%;justify-self:end">
+          <picture>
+            <source srcset="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__5.webp" type="image/webp">
+            <img src="../Patagón/Lab6_JuegosAnalógicos_2025_Diaz%20Herrera_Gallo__5.jpg" alt="Patagón 5" loading="lazy" width="1920" height="2688">
+          </picture>
+        </div>
       </div>
     </div>
 
@@ -159,6 +161,57 @@
   </footer>
 
   <script defer src="../js/main.js"></script>
+  <script defer src="../js/book-viewer.js"></script>
   <script defer src="../js/i18n.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const manualPages = [
+        '../Patagón/Manual/tapa.jpg',
+        '../Patagón/Manual/manual_01.jpg',
+        '../Patagón/Manual/manual-02.jpg',
+        '../Patagón/Manual/manual-03.jpg',
+        '../Patagón/Manual/manual-04.jpg',
+        '../Patagón/Manual/manual-05.jpg',
+        '../Patagón/Manual/manual-06.jpg',
+        '../Patagón/Manual/manual-07.jpg',
+        '../Patagón/Manual/manual-08.jpg',
+        '../Patagón/Manual/manual-09.jpg',
+        '../Patagón/Manual/manual-10.jpg',
+        '../Patagón/Manual/contratapa.jpg',
+      ];
+      document.getElementById('open-manual').addEventListener('click', () => {
+        BookViewer.open(manualPages);
+      });
+
+      /* fade-in + typewriter for manual section */
+      const section = document.getElementById('manual-section');
+      const caption = document.getElementById('manual-caption');
+      const text = 'Manual de Juego';
+      let triggered = false;
+
+      function typewrite() {
+        caption.textContent = '';
+        let i = 0;
+        const timer = setInterval(() => {
+          i++;
+          caption.textContent = text.slice(0, i);
+          if (i >= text.length) clearInterval(timer);
+        }, 45);
+      }
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !triggered) {
+            triggered = true;
+            section.classList.add('is-visible');
+            setTimeout(typewrite, 600);
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      obs.observe(section);
+    });
+  </script>
 </body>
 </html>

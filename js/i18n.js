@@ -19,20 +19,20 @@ const translations = {
     // — index.html —
     'hero-badge':        'MULTIDISCIPLINARY DESIGNER',
     'hero-title':        'Hi :)',
-    'hero-desc':         "I'm José, a designer based in Buenos Aires, Argentina. I specialize in 3D, communication and digital design.",
+    'hero-desc':         "I'm José, a designer from Buenos Aires, Argentina. I specialize in 3D, communication and digital environments.",
     'section-projects':  'PROJECTS',
     'latest-title':      'Latest projects',
     'collab-title':      "Let's Collaborate",
 
     // — about.html —
     'about-label':       'About',
-    'about-bio-1':       'I strongly believe that design is an area for empathizing with others, being able to move them emotionally in the same way it moves me. To convey and communicate ideas.',
+    'about-bio-1':       'To me, design is empathy. Understanding others and moving them the way design moves me.<br><br>Conveying and communicating ideas.',
     'about-bio-title-1': 'Education',
     'about-bio-title-2': 'Career',
-    'about-bio-2a':      "I am a designer based in Buenos Aires, with a Bachelor's degree in Design from Universidad Torcuato Di Tella. My academic formation was instrumental in shaping my comprehensive understanding of the discipline, teaching me to approach complex problems with a strategic mindset and deep user empathy. This foundation allows me to tackle challenges by truly thinking like a designer, looking beyond aesthetics to find functional solutions.",
-    'about-bio-2b':      "Throughout my studies, I expanded my creative horizons, moving beyond traditional boundaries to cultivate a strong passion for industrial design, digital communication, and the creation of multimedia objects.",
-    'about-bio-3a':      "Complementing my academic background, I have gained professional experience working as a Community Manager and Graphic Designer since 2024. These roles have allowed me to dive deep into the digital landscape, mastering the nuances of social media dynamics and the art of community building.",
-    'about-bio-3b':      "This combination of theoretical knowledge and practical application enables me to bridge the gap between physical design and digital interaction, delivering visual solutions that not only solve problems but also resonate effectively with audiences in an increasingly connected world.",
+    'about-bio-2a':      "I'm a multimedia designer, originally from and based in Buenos Aires. I hold a Bachelor's degree in Design from Universidad Torcuato Di Tella. My studies taught me to truly think through problems, to go beyond aesthetics and find solutions that work.",
+    'about-bio-2b':      "Throughout my studies I discovered a strong passion for industrial design, digital communication and the creation of multimedia objects.",
+    'about-bio-3a':      "Since 2024 I've worked as a Community Manager and Graphic Designer, which immersed me fully in the digital world: social media, communities and content.",
+    'about-bio-3b':      "That allowed me to put what I learned into practice and grow professionally in the digital space.",
     'disciplines-label': 'Disciplines',
     'disc-industrial':   'Industrial Design',
     'disc-3d':           '3D Design',
@@ -44,7 +44,7 @@ const translations = {
 
     // — contact.html —
     'contact-heading':   'Get in touch',
-    'contact-subtitle':  "Let's create something amazing together!",
+    'contact-subtitle':  "Let's create something together!",
     'contact-phone-lbl': 'CONTACT NUMBER',
     'contact-email-lbl': 'EMAIL ADDRESS',
     'contact-loc-lbl':   'LOCATION',
@@ -69,10 +69,10 @@ const translations = {
     // — Savia —
     'savia-cat':         'Urban Furniture · 3D',
     'savia-area':        'Industrial Design',
-    'savia-desc-1':      'A modular urban furniture set centered on the relationship between public space, workers and nature. The structure utilizes a pipe-based construction system that encourages spontaneous vegetation growth, blurring the line between industrial design and the natural landscape.',
-    'savia-desc-2':      'In this project, I served as the 3D Designer. I was responsible for the conceptualization, modeling, rendering, and finishing of the pieces. The urban furniture set includes ischiatic supports, benches, and tables, featuring a pipe-based construction system designed to allow nature to grow through it while connecting the various components to create different spatial configurations.',
+    'savia-desc-1':      'Modular urban furniture that explores the relationship between public space, people and nature. A pipe-based construction system that lets vegetation grow freely, blurring the line between the industrial and the natural.',
+    'savia-desc-2':      'I was the <span style="color:#9fd6db">3D Designer</span> on this project. I conceptualized, modeled, rendered and finished the pieces. The system includes ischiatic supports, benches and tables, connected by pipes through which nature grows and expands.',
     'savia-heading-3':   'Web configurator',
-    'savia-desc-3':      'Finally, I developed a <a href="https://configurador-savia-git-main-co1or4dos-projects.vercel.app/" target="_blank" rel="noopener noreferrer">web configurator</a> that allows anyone to explore our system. Users can assemble different parts and create their own custom configurations, bringing the modular system to life.',
+    'savia-desc-3':      'I also developed a <a href="https://configurador-savia-git-main-co1or4dos-projects.vercel.app/" target="_blank" rel="noopener noreferrer">web configurator</a> so anyone can explore the system, assemble pieces and build their own configuration.',
     'savia-img-label':   'Images',
     'savia-coming-soon': 'Coming Soon',
 
@@ -80,13 +80,14 @@ const translations = {
     'plexa-cat':         'Furniture · LED',
     'plexa-area':        'Furniture Design',
     'plexa-desc-1':      'Designed as a study of contrasts, PLEXA bridges the gap between the rigidity of exact sciences and the fluidity of soft disciplines, like design.',
-    'plexa-desc-2':      "In this collaborative project, I served as the Technical Lead. My focus was on structural feasibility, including load calculations and dimensional analysis. I designed and 3D-modeled the white connecting nodes —printed in PETG— which act as both structural joints and aesthetic elements. I also oversaw the fabrication of the 'Palo Blanco' wood rods, which were turned for precision assembly and finished with linseed oil. The seat and backrest feature polycarbonate panels mounted via glass standoffs.",
+    'plexa-desc-2':      "I was the <span style=\"color:#9fd6db\">Technical Lead</span> on this project. I handled structural feasibility: load calculations and dimensional analysis. I designed and 3D-modeled the white connecting nodes —printed in PETG— which work as both structural joints and aesthetic elements. I also oversaw the fabrication of the Palo Blanco wood rods, turned for precision assembly and finished with linseed oil. The seat and backrest are polycarbonate panels mounted with glass standoffs.",
 
     // — Patagón —
     'patagon-cat':       'Board Game · Strategy',
     'patagon-area':      'Game Design',
     'patagon-desc-1':    'Strategy board game combining area control and resource management mechanics. It takes place in a whimsical, stylized medieval world.',
-    'patagon-desc-2':    'This was a collaborative project where tasks were shared equally between both team members. Together, we handled the conceptualization, rule-setting, and the full illustration of the board, characters, and environments. The final result is a 4-player game featuring an MDF board, custom player tokens, and four distinct card decks—each with its own unique illustrations. The game is set in a humorous, stylized version of the Argentine Patagonia.',
+    'patagon-desc-2':    'A collaborative project where we split everything equally. We handled conceptualization, rules, and the full illustration of the board, characters and environments.<br><br>The result: a 4-player game with an MDF board, custom tokens, and four card decks—each with its own illustrations. All set in a humorous, stylized Argentine Patagonia.',
+    'patagon-manual-title': 'Game Manual',
 
     // — Herbario —
     'herbario-cat':      'Fanzine · Illustration',
@@ -98,7 +99,8 @@ const translations = {
     // — CCR+ —
     'ccr-cat':           'App Design',
     'ccr-area':          'Digital Design',
-    'ccr-desc-1':        'CCR+ is an app for connecting young people, artists, and people living in community.',
+    'ccr-desc-1':        'CCR+ is a platform designed to bring together the people who visit the Centro Cultural Recoleta — young people, artists, and communities — and encourage them to participate in its activities.',
+    'ccr-desc-2':        'Beyond the app, the project includes a series of on-site interventions throughout the venue, bridging the digital experience with the physical space.',
     'ccr-proj-label':    'Project',
     'ccr-coming-soon':   'Coming Soon',
 
@@ -146,20 +148,20 @@ const translations = {
     // — index.html —
     'hero-badge':        'DISEÑADOR MULTIDISCIPLINARIO',
     'hero-title':        'Hola :)',
-    'hero-desc':         'Soy José, diseñador radicado en Buenos Aires, Argentina. Me especializo en diseño 3D, comunicación y diseño digital.',
+    'hero-desc':         'Soy José, un diseñador de Buenos Aires, Argentina. Me especializo en diseño 3D, comunicación y entornos digitales.',
     'section-projects':  'PROYECTOS',
     'latest-title':      'Últimos proyectos',
     'collab-title':      'Colaboremos',
 
     // — about.html —
     'about-label':       'Sobre mí',
-    'about-bio-1':       'Creo firmemente que el diseño es un área para empatizar con los demás, capaz de movilizarlos emocionalmente de la misma manera en que me moviliza a mí. Para transmitir y comunicar ideas.',
+    'about-bio-1':       'Para mí, diseñar es empatizar. Entender al otro y poder moverlo como el diseño me mueve a mí.<br><br>Poder transmitir y comunicar ideas.',
     'about-bio-title-1': 'Educación',
     'about-bio-title-2': 'Trayectoria',
-    'about-bio-2a':      'Soy diseñador radicado en Buenos Aires, con una Licenciatura en Diseño de la Universidad Torcuato Di Tella. Mi formación académica fue fundamental para construir una comprensión integral de la disciplina, enseñándome a abordar problemas complejos con una mentalidad estratégica y una profunda empatía hacia los usuarios. Esta base me permite enfrentar desafíos pensando genuinamente como diseñador, yendo más allá de la estética para encontrar soluciones funcionales.',
-    'about-bio-2b':      'A lo largo de mis estudios, amplié mis horizontes creativos, superando los límites tradicionales para cultivar una fuerte pasión por el diseño industrial, la comunicación digital y la creación de objetos multimedia.',
-    'about-bio-3a':      'Complementando mi formación académica, cuento con experiencia profesional como Community Manager y Diseñador Gráfico desde 2024. Estos roles me permitieron adentrarme en el ecosistema digital, dominando los matices de las redes sociales y el arte de construir comunidades.',
-    'about-bio-3b':      'Esta combinación de conocimiento teórico y aplicación práctica me permite tender puentes entre el diseño físico y la interacción digital, brindando soluciones visuales que no solo resuelven problemas sino que también conectan efectivamente con audiencias en un mundo cada vez más interconectado.',
+    'about-bio-2a':      'Soy diseñador multimedial, originario y ubicado en Buenos Aires. Licenciado en Diseño por la Universidad Torcuato Di Tella. La carrera me formó para pensar más allá de lo estético, entender problemas y encontrar soluciones reales.',
+    'about-bio-2b':      'En ese camino descubrí mi pasión por el diseño industrial, la comunicación digital y la creación de objetos multimedia.',
+    'about-bio-3a':      'Desde 2024 trabajo como Community Manager y Diseñador Gráfico, lo que me sumergió de lleno en el mundo digital: redes, comunidades y contenido.',
+    'about-bio-3b':      'Eso me permitió poner en práctica lo aprendido y desarrollarme en el ámbito profesional digital.',
     'disciplines-label': 'Disciplinas',
     'disc-industrial':   'Diseño Industrial',
     'disc-3d':           'Diseño 3D',
@@ -171,7 +173,7 @@ const translations = {
 
     // — contact.html —
     'contact-heading':   'Contacto',
-    'contact-subtitle':  '¡Creemos algo increíble juntos!',
+    'contact-subtitle':  'Creemos algo juntos.',
     'contact-phone-lbl': 'NÚMERO DE CONTACTO',
     'contact-email-lbl': 'CORREO ELECTRÓNICO',
     'contact-loc-lbl':   'UBICACIÓN',
@@ -196,10 +198,10 @@ const translations = {
     // — Savia —
     'savia-cat':         'Mobiliario Urbano · 3D',
     'savia-area':        'Diseño Industrial',
-    'savia-desc-1':      'Un conjunto de mobiliario urbano modular centrado en la relación entre el espacio público, las personas y la naturaleza. La estructura utiliza un sistema constructivo de caños que favorece el crecimiento espontáneo de vegetación, desdibujando el límite entre el diseño industrial y el paisaje natural.',
-    'savia-desc-2':      'En este proyecto, fui el Diseñador 3D. Me encargué de la conceptualización, el modelado, el renderizado y el acabado de las piezas. El conjunto de mobiliario urbano incluye apoyaisquiones, bancos y mesas, con un sistema constructivo de caños diseñado para que la naturaleza crezca a través de él mientras conecta los distintos componentes para crear diferentes configuraciones espaciales.',
+    'savia-desc-1':      'Mobiliario urbano modular que trabaja la relación entre el espacio público, las personas y la naturaleza. Un sistema constructivo de caños que deja crecer la vegetación, desdibujando el límite entre lo industrial y lo natural.',
+    'savia-desc-2':      'Fui el <span style="color:#9fd6db">Diseñador 3D</span> del proyecto. Me encargué de conceptualizar, modelar, renderizar y terminar las piezas. El sistema incluye apoyaisquiones, bancos y mesas, conectados por caños a través de los cuales la naturaleza crece y se expande.',
     'savia-heading-3':   'Configurador web',
-    'savia-desc-3':      'Finalmente, desarrollé un <a href="https://configurador-savia-git-main-co1or4dos-projects.vercel.app/" target="_blank" rel="noopener noreferrer">configurador web</a> que permite a cualquier persona explorar nuestro sistema. Los usuarios pueden ensamblar distintas piezas y crear sus propias configuraciones personalizadas, dándole vida al sistema modular.',
+    'savia-desc-3':      'También desarrollé un <a href="https://configurador-savia-git-main-co1or4dos-projects.vercel.app/" target="_blank" rel="noopener noreferrer">configurador web</a> para que cualquiera pueda explorar el sistema, ensamblar piezas y armar su propia configuración.',
     'savia-img-label':   'Imágenes',
     'savia-coming-soon': 'Próximamente',
 
@@ -207,13 +209,14 @@ const translations = {
     'plexa-cat':         'Mobiliario · LED',
     'plexa-area':        'Diseño de Mobiliario',
     'plexa-desc-1':      'Diseñado como un estudio de contrastes, PLEXA tiende un puente entre la rigidez de las ciencias exactas y la fluidez de las disciplinas blandas, como el diseño.',
-    'plexa-desc-2':      'En este proyecto colaborativo, fui el Líder Técnico. Mi enfoque estuvo en la viabilidad estructural, incluyendo cálculos de carga y análisis dimensional. Diseñé y modelé en 3D los nodos conectores blancos —impresos en PETG— que funcionan tanto como juntas estructurales y como elementos estéticos. También supervisé la fabricación de los varillones de madera de Palo Blanco, torneados para un ensamblaje de precisión y terminados con aceite de lino. El asiento y el respaldo están formados por paneles de policarbonato montados con separadores de vidrio.',
+    'plexa-desc-2':      'Fui el <span style="color:#9fd6db">Líder Técnico</span> del proyecto. Me ocupé de la viabilidad estructural: cálculos de carga y análisis dimensional. Diseñé y modelé en 3D los nodos conectores blancos —impresos en PETG— que funcionan como juntas estructurales y como elementos estéticos. También supervisé la fabricación de los varillones de Palo Blanco, torneados a precisión y terminados con aceite de lino. El asiento y el respaldo son paneles de policarbonato montados con separadores de vidrio.',
 
     // — Patagón —
     'patagon-cat':       'Juego de Mesa · Estrategia',
     'patagon-area':      'Diseño de Juegos',
     'patagon-desc-1':    'Juego de mesa de estrategia que combina mecánicas de control de zonas y gestión de recursos. Transcurre en un mundo medieval estilizado y pintoresco.',
-    'patagon-desc-2':    'Fue un proyecto colaborativo donde las tareas se repartieron de manera equitativa entre los dos integrantes. Juntos trabajamos en la conceptualización, el reglamento y la ilustración completa del tablero, los personajes y los entornos. El resultado final es un juego para 4 jugadores con un tablero de MDF, fichas personalizadas y cuatro mazos de cartas distintos, cada uno con ilustraciones propias. El juego está ambientado en una versión humorística y estilizada de la Patagonia argentina.',
+    'patagon-desc-2':    'Proyecto colaborativo donde nos repartimos todo por igual. Trabajamos en la conceptualización, el reglamento y la ilustración completa del tablero, los personajes y los entornos.<br><br>El resultado: un juego para 4 jugadores con tablero de MDF, fichas personalizadas y cuatro mazos de cartas distintos, cada uno con ilustraciones propias. Todo ambientado en una Patagonia argentina humorística y estilizada.',
+    'patagon-manual-title': 'Manual de Juego',
 
     // — Herbario —
     'herbario-cat':      'Fanzine · Ilustración',
@@ -225,7 +228,8 @@ const translations = {
     // — CCR+ —
     'ccr-cat':           'Diseño de App',
     'ccr-area':          'Diseño Digital',
-    'ccr-desc-1':        'CCR+ es una app para conectar jóvenes, artistas y personas que viven en comunidad.',
+    'ccr-desc-1':        'CCR+ es una plataforma pensada para unir a la gente que visita el Centro Cultural Recoleta —jóvenes, artistas y comunidades— e incentivarlos a participar en sus actividades.',
+    'ccr-desc-2':        'Además de la app, el proyecto incluye una serie de intervenciones en el recinto, conectando la experiencia digital con el espacio físico.',
     'ccr-proj-label':    'Proyecto',
     'ccr-coming-soon':   'Próximamente',
 
