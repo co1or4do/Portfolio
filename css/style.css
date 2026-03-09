@@ -1995,14 +1995,14 @@ a.contact-item__icon {
 
 /* Illustrated title image (replaces text pd-title for projects with a logo/wordmark) */
 .pd-title-img {
-  width: clamp(200px, 60%, 480px);
+  width: clamp(280px, 70%, 600px);
   height: auto;
   display: block;
 }
 
 /* Title image inside intro-left — replaces the text h1 */
 .pd-intro__left .pd-title-img {
-  width: clamp(100px, 35%, 260px);
+  width: clamp(180px, 50%, 400px);
   height: auto;
 }
 
@@ -2051,7 +2051,7 @@ a.contact-item__icon {
 
 /* --- BODY ZONE --- */
 .pd-body {
-  padding: var(--space-20) var(--padding-desktop);
+  padding: var(--space-20) var(--padding-desktop) var(--space-8);
   display: grid;
   grid-template-columns: 200px 1fr;
   gap: var(--space-20);
@@ -2123,6 +2123,7 @@ a.contact-item__icon {
   width: 100%;
   height: auto;
   display: block;
+  cursor: pointer;
 }
 
 .pd-prose p {
@@ -2433,8 +2434,12 @@ a.contact-item__icon {
 
   .pd-body {
     grid-template-columns: 1fr;
-    gap: var(--space-10);
-    padding: var(--space-12) var(--padding-mobile);
+    gap: var(--space-6);
+    padding: var(--space-8) var(--padding-mobile);
+  }
+
+  .pd-prose {
+    gap: var(--space-2);
   }
 
   .pd-prose p {
@@ -2448,6 +2453,16 @@ a.contact-item__icon {
     grid-column: 1 / -1;
   }
 
+  .pd-prose p + p {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+  }
+
+  .pd-prose__heading {
+    margin-top: var(--space-10);
+    padding-top: var(--space-6);
+  }
+
   .pd-slideshow {
     grid-column: 1 / -1;
     grid-row: auto;
@@ -2455,10 +2470,27 @@ a.contact-item__icon {
   }
 
   .pd-gallery {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     padding: 0;
-    margin-bottom: var(--space-16);
+    margin-bottom: var(--space-4);
     gap: var(--space-4);
+  }
+
+  .pd-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pd-gallery__item {
+    flex: 0 0 85vw;
+    scroll-snap-align: center;
+  }
+
+  .pd-gallery__item:only-child {
+    flex: 1 1 100%;
   }
 
   .pd-gallery__item--full,
@@ -2467,18 +2499,18 @@ a.contact-item__icon {
   .pd-gallery__item--half,
   .pd-gallery__item--wide,
   .pd-gallery__item--portrait {
-    grid-column: 1 / -1;
+    grid-column: unset;
   }
 
   .pd-gallery__item--large,
   .pd-gallery__item--small,
   .pd-gallery__item--half {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
   }
 
   .pd-gallery__item--full,
   .pd-gallery__item--wide {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
   }
 
   .pd-gallery__item--portrait {
@@ -3138,15 +3170,17 @@ body.game-open {
 .book-overlay--visible {
   opacity: 1;
   visibility: visible;
+  cursor: default;
 }
 
 .book-wrapper {
-  --book-w: min(80vh * 0.705, 50vw);
-  --book-h: min(80vh, 71vw * 1.414);
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
 }
 
 .book-close {
@@ -3161,47 +3195,24 @@ body.game-open {
   line-height: 1;
   opacity: 0.7;
   transition: opacity 0.2s;
-  z-index: 10;
+  z-index: 10001;
+  padding: 8px;
 }
 
 .book-close:hover {
   opacity: 1;
 }
 
+/* page-flip library container — dimensions set by JS */
 .book {
-  width: var(--book-w);
-  height: var(--book-h);
   position: relative;
-  perspective: 2400px;
-  transform-style: preserve-3d;
   touch-action: none;
 }
 
-.book__leaf {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  transform-origin: left center;
-  transform: rotateY(0deg);
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.book__leaf--flipping {
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.book__leaf--dragging {
-  transition: none !important;
-}
-
+/* pages fed to StPageFlip */
 .book__page {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+  background: #fff;
   overflow: hidden;
-  border-radius: 2px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .book__page img {
@@ -3213,65 +3224,9 @@ body.game-open {
   -webkit-user-select: none;
 }
 
-.book__page--front {
-  z-index: 1;
-}
-
-.book__page--back {
-  transform: rotateY(180deg);
-  z-index: 0;
-}
-
-/* page curl shadow overlays */
-.book__page--front::after,
-.book__page--back::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.book__page--front::after {
-  background: linear-gradient(to left,
-    rgba(0, 0, 0, 0.25) 0%,
-    rgba(0, 0, 0, 0.08) 15%,
-    transparent 50%);
-}
-
-.book__page--back::after {
-  background: linear-gradient(to right,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.1) 10%,
-    transparent 40%);
-}
-
-.book__leaf--flipping .book__page--front::after,
-.book__leaf--flipping .book__page--back::after,
-.book__leaf--dragging .book__page--front::after,
-.book__leaf--dragging .book__page--back::after {
-  opacity: 1;
-}
-
-/* shadow cast on the page below */
-.book__shadow {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right,
-    rgba(0, 0, 0, 0.15) 0%,
-    transparent 30%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: 0;
-}
-
-/* nav arrows — positioned absolutely relative to wrapper */
+/* nav arrows — flex items beside the book */
 .book-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  flex-shrink: 0;
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.5);
   color: #fff;
@@ -3293,14 +3248,6 @@ body.game-open {
   color: #fff;
 }
 
-.book-nav--prev {
-  right: calc(var(--book-w) + var(--space-8));
-}
-
-.book-nav--next {
-  left: calc(var(--book-w) + var(--space-8));
-}
-
 /* ── Manual section on page ── */
 .pd-manual-section {
   grid-column: 1 / -1;
@@ -3310,6 +3257,7 @@ body.game-open {
   gap: 0;
   max-width: 25%;
   justify-self: end;
+  margin-top: var(--space-12);
   opacity: 0;
   transition: opacity 1.2s ease;
 }
@@ -3354,35 +3302,27 @@ body.game-open {
     max-width: 160px;
   }
 
-  /* single-page centered view on mobile */
+  /* mobile: nav buttons below the book, aligned to book edges */
   .book-wrapper {
-    --book-w: min(80vw, 55vh * 0.705);
-    --book-h: min(80vw * 1.419, 55vh);
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0;
   }
 
-  .book {
-    overflow: hidden;
+  .book-wrapper .book {
+    order: 0;
+    flex-basis: 100%;
+    margin-bottom: 3.5rem;
   }
 
-  .book-nav {
+  .book-wrapper .book-nav {
+    position: static;
+    transform: none;
     width: 44px;
     height: 44px;
     font-size: 1.2rem;
-    top: auto;
-    bottom: calc(-44px - var(--space-6));
-    transform: none;
-  }
-
-  .book-nav--prev {
-    right: auto;
-    left: 0;
-  }
-
-  .book-nav--next {
-    left: auto;
-    right: 0;
+    order: 1;
   }
 }

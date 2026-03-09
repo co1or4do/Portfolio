@@ -6,6 +6,12 @@
   *, *:hover {
     cursor: none !important;
   }
+
+  .book-overlay--visible,
+  .book-overlay--visible *,
+  .book-overlay--visible *:hover {
+    cursor: auto !important;
+  }
 }
 
 .custom-cursor {

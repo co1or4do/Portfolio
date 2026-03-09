@@ -110,75 +110,19 @@
           </div>
         </div>
 
-        <!-- FANZINE SPREAD — 2-column book layout -->
-        <div class="fanzine-spread" data-reveal>
-      <!-- Row 1: Tapa (left only) -->
-      <div class="fanzine-spread__page">
-        <picture>
-              <source srcset="../Herbario/Fotos-01.webp" type="image/webp">
-              <img src="../Herbario/Fotos-01.jpg" alt="Herbario — Tapa" loading="lazy" width="960" height="1356">
-            </picture>
-      </div>
-      <div class="fanzine-spread__empty"></div>
-
-      <!-- Row 2: pages 2–3 -->
-      <div class="fanzine-spread__page">
-        <picture>
-              <source srcset="../Herbario/Fotos-02.webp" type="image/webp">
-              <img src="../Herbario/Fotos-02.jpg" alt="Herbario — Página 2" loading="lazy" width="960" height="1356">
-            </picture>
-      </div>
-      <div class="fanzine-spread__page">
-        <picture>
-              <source srcset="../Herbario/Fotos-03.webp" type="image/webp">
-              <img src="../Herbario/Fotos-03.jpg" alt="Herbario — Página 3" loading="lazy" width="960" height="1356">
-            </picture>
-      </div>
-
-      <!-- Row 3: pages 4–5 -->
-      <div class="fanzine-spread__page">
-        <picture>
-              <source srcset="../Herbario/Fotos-04.webp" type="image/webp">
-              <img src="../Herbario/Fotos-04.jpg" alt="Herbario — Página 4" loading="lazy" width="960" height="1356">
-            </picture>
-      </div>
-      <div class="fanzine-spread__page">
-        <picture>
-              <source srcset="../Herbario/Fotos-05.webp" type="image/webp">
-              <img src="../Herbario/Fotos-05.jpg" alt="Herbario — Página 5" loading="lazy" width="960" height="1356">
-            </picture>
-      </div>
-
-      <!-- Row 4: pages 6–7 -->
-      <div class="fanzine-spread__page">
-        <picture>
-              <source srcset="../Herbario/Fotos-06.webp" type="image/webp">
-              <img src="../Herbario/Fotos-06.jpg" alt="Herbario — Página 6" loading="lazy" width="960" height="1356">
-            </picture>
-      </div>
-      <div class="fanzine-spread__page">
-        <picture>
-              <source srcset="../Herbario/Fotos-07.webp" type="image/webp">
-              <img src="../Herbario/Fotos-07.jpg" alt="Herbario — Página 7" loading="lazy" width="960" height="1356">
-            </picture>
-      </div>
-
-      <!-- Row 5: Contratapa (right only) -->
-      <div class="fanzine-spread__empty"></div>
-      <div class="fanzine-spread__page">
-        <picture>
-              <source srcset="../Herbario/Fotos-08.webp" type="image/webp">
-              <img src="../Herbario/Fotos-08.jpg" alt="Herbario — Contratapa" loading="lazy" width="960" height="1356">
-            </picture>
-      </div>
-
-      <!-- Row 6: Reverso — full width -->
-      <div class="fanzine-spread__page fanzine-spread__page--full">
-        <picture>
-              <source srcset="../Herbario/Reverso.webp" type="image/webp">
-              <img src="../Herbario/Reverso.jpg" alt="Herbario — Reverso" loading="lazy" width="1358" height="1920">
-            </picture>
-      </div>
+        <!-- FANZINE -->
+        <div class="pd-manual-section" id="fanzine-section">
+          <button class="pd-manual-cover" id="open-fanzine" aria-label="Open fanzine">
+            <img src="../Herbario/Fotos-01.jpg" alt="Herbario Fanzine Cover" loading="lazy">
+          </button>
+          <p class="pd-manual-subtitle" id="fanzine-caption"></p>
+        </div>
+        <!-- REVERSO -->
+        <div class="col-1-4" data-reveal style="margin-top:10rem">
+          <picture>
+            <source srcset="../Herbario/Reverso.webp" type="image/webp">
+            <img src="../Herbario/Reverso.jpg" alt="Herbario — Reverso" loading="lazy" width="1358" height="1920">
+          </picture>
         </div>
       </div>
     </div>
@@ -209,6 +153,54 @@
   </footer>
 
   <script defer src="../js/main.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+  <script defer src="../js/book-viewer.js"></script>
   <script defer src="../js/i18n.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fanzinePages = [
+        '../Herbario/Fotos-01.jpg',
+        '../Herbario/Fotos-02.jpg',
+        '../Herbario/Fotos-03.jpg',
+        '../Herbario/Fotos-04.jpg',
+        '../Herbario/Fotos-05.jpg',
+        '../Herbario/Fotos-06.jpg',
+        '../Herbario/Fotos-07.jpg',
+        '../Herbario/Fotos-08.jpg',
+      ];
+      document.getElementById('open-fanzine').addEventListener('click', () => {
+        BookViewer.open(fanzinePages);
+      });
+
+      /* fade-in + typewriter for fanzine section */
+      const section = document.getElementById('fanzine-section');
+      const caption = document.getElementById('fanzine-caption');
+      const text = 'Fanzine';
+      let triggered = false;
+
+      function typewrite() {
+        caption.textContent = '';
+        let i = 0;
+        const timer = setInterval(() => {
+          i++;
+          caption.textContent = text.slice(0, i);
+          if (i >= text.length) clearInterval(timer);
+        }, 45);
+      }
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !triggered) {
+            triggered = true;
+            section.classList.add('is-visible');
+            setTimeout(typewrite, 600);
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      obs.observe(section);
+    });
+  </script>
 </body>
 </html>

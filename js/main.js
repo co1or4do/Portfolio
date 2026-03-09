@@ -96,19 +96,44 @@
     }
   }
 
-  nameEl.addEventListener('mouseenter', () => {
-    clearTimeout(restoreTimer);
-    cancelFlag = true;
-    setTimeout(() => glitchTransition(nameEl.textContent, targetText), 10);
-  });
+  const isMobile = window.innerWidth < 744;
 
-  nameEl.addEventListener('mouseleave', () => {
-    clearTimeout(restoreTimer);
-    cancelFlag = true;
-    restoreTimer = setTimeout(() => {
-      glitchTransition(nameEl.textContent, originalText);
-    }, 200);
-  });
+  if (isMobile) {
+    // Mobile: start as "Colo", cycle with glitch every few seconds
+    const mobileAlt = 'José M. Diaz Herrera';
+    nameEl.textContent = targetText; // start as "Colo"
+    let showingColo = true;
+    let cycleTimer = null;
+
+    function cycle() {
+      cancelFlag = true;
+      setTimeout(() => {
+        const from = showingColo ? targetText : mobileAlt;
+        const to = showingColo ? mobileAlt : targetText;
+        glitchTransition(from, to, () => {
+          showingColo = !showingColo;
+          cycleTimer = setTimeout(cycle, showingColo ? 15000 : 3000);
+        });
+      }, 10);
+    }
+
+    cycleTimer = setTimeout(cycle, 15000);
+  } else {
+    // Desktop: hover-based glitch
+    nameEl.addEventListener('mouseenter', () => {
+      clearTimeout(restoreTimer);
+      cancelFlag = true;
+      setTimeout(() => glitchTransition(nameEl.textContent, targetText), 10);
+    });
+
+    nameEl.addEventListener('mouseleave', () => {
+      clearTimeout(restoreTimer);
+      cancelFlag = true;
+      restoreTimer = setTimeout(() => {
+        glitchTransition(nameEl.textContent, originalText);
+      }, 200);
+    });
+  }
 })();
 
 // ============================================
@@ -192,7 +217,7 @@ document.querySelectorAll('.navbar__link').forEach(link => {
 
     // Invert cursor color over images and dark backgrounds
     const el = document.elementFromPoint(e.clientX, e.clientY);
-    if (el && (el.tagName === 'IMG' || el.closest('.collab-section') || el.closest('.btn-cta') || el.closest('.carousel__arrow') || el.closest('.latest-card__arrow') || el.closest('.pieces-catalog__arrow'))) {
+    if (el && (el.tagName === 'IMG' || el.closest('.lightbox') || el.closest('.collab-section') || el.closest('.btn-cta') || el.closest('.carousel__arrow') || el.closest('.latest-card__arrow') || el.closest('.pieces-catalog__arrow'))) {
       cursor.classList.add('custom-cursor--inverted');
     } else {
       cursor.classList.remove('custom-cursor--inverted');
@@ -897,7 +922,7 @@ document.querySelectorAll('.navbar__link').forEach(link => {
     if (e.key === 'Escape') close();
   });
 
-  document.querySelectorAll('.pd-gallery__item img, .pd-intro__right img').forEach(function (el) {
+  document.querySelectorAll('.pd-gallery__item img, .pd-intro__right img, .pd-prose img').forEach(function (el) {
     el.addEventListener('click', function () {
       open(el.src, el.alt);
     });

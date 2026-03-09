@@ -1,25 +1,13 @@
 /* ── Book Viewer ─────────────────────────────────────────────
-   3D page-flip manual viewer with drag interaction.
+   Realistic page-flip manual viewer powered by StPageFlip.
    Usage: call BookViewer.open(pages) where pages is an array
    of image URLs ordered front-to-back.
    ────────────────────────────────────────────────────────── */
 const BookViewer = (() => {
   'use strict';
 
-  let overlay, book, prevBtn, nextBtn, closeBtn;
-  let leaves = [];
-  let currentPage = 0;
-  let totalLeaves = 0;
-  let flipping = false;
-
-  /* drag state */
-  let dragging = false;
-  let dragStartX = 0;
-  let dragDelta = 0;
-  let dragLeaf = null;
-  let dragDirection = 0;
-
-  const FLIP_DURATION = 800;
+  let overlay, bookEl, prevBtn, nextBtn, closeBtn;
+  let pageFlip = null;
   let isMobile = false;
 
   /* ── build DOM ── */
@@ -38,67 +26,21 @@ const BookViewer = (() => {
     closeBtn.setAttribute('aria-label', 'Close manual');
     overlay.appendChild(closeBtn);
 
-    book = document.createElement('div');
-    book.className = 'book';
+    bookEl = document.createElement('div');
+    bookEl.className = 'book';
 
-    leaves = [];
-
-    if (isMobile) {
-      /* mobile: one page per leaf (front only) */
-      totalLeaves = pages.length;
-      for (let i = 0; i < totalLeaves; i++) {
-        const leaf = document.createElement('div');
-        leaf.className = 'book__leaf';
-        leaf.style.zIndex = totalLeaves - i;
-
-        const front = document.createElement('div');
-        front.className = 'book__page book__page--front';
-        const fImg = document.createElement('img');
-        fImg.src = pages[i];
-        fImg.alt = `Page ${i + 1}`;
-        fImg.draggable = false;
-        front.appendChild(fImg);
-
-        const back = document.createElement('div');
-        back.className = 'book__page book__page--back';
-
-        leaf.appendChild(front);
-        leaf.appendChild(back);
-        book.appendChild(leaf);
-        leaves.push(leaf);
-      }
-    } else {
-      /* desktop: two pages per leaf */
-      totalLeaves = Math.ceil(pages.length / 2);
-      for (let i = 0; i < totalLeaves; i++) {
-        const leaf = document.createElement('div');
-        leaf.className = 'book__leaf';
-        leaf.style.zIndex = totalLeaves - i;
-
-        const front = document.createElement('div');
-        front.className = 'book__page book__page--front';
-        const fImg = document.createElement('img');
-        fImg.src = pages[i * 2];
-        fImg.alt = `Page ${i * 2 + 1}`;
-        fImg.draggable = false;
-        front.appendChild(fImg);
-
-        const back = document.createElement('div');
-        back.className = 'book__page book__page--back';
-        if (pages[i * 2 + 1]) {
-          const bImg = document.createElement('img');
-          bImg.src = pages[i * 2 + 1];
-          bImg.alt = `Page ${i * 2 + 2}`;
-          bImg.draggable = false;
-          back.appendChild(bImg);
-        }
-
-        leaf.appendChild(front);
-        leaf.appendChild(back);
-        book.appendChild(leaf);
-        leaves.push(leaf);
-      }
-    }
+    /* each page is a direct child div with an img inside */
+    pages.forEach((src, i) => {
+      const page = document.createElement('div');
+      page.className = 'book__page';
+      /* all pages flip with the same paper-curl effect */
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `Page ${i + 1}`;
+      img.draggable = false;
+      page.appendChild(img);
+      bookEl.appendChild(page);
+    });
 
     /* nav buttons */
     prevBtn = document.createElement('button');
@@ -112,247 +54,129 @@ const BookViewer = (() => {
     nextBtn.setAttribute('aria-label', 'Next page');
 
     wrapper.appendChild(prevBtn);
-    wrapper.appendChild(book);
+    wrapper.appendChild(bookEl);
     wrapper.appendChild(nextBtn);
     overlay.appendChild(wrapper);
+    /* prevent clicks inside the wrapper from closing the overlay */
+    wrapper.addEventListener('click', (e) => e.stopPropagation());
     document.body.appendChild(overlay);
   }
 
-  /* ── shadow helpers for curl effect ── */
-  function setCurlShadow(leaf, progress) {
-    /* progress: 0 = flat, 1 = fully flipped */
-    const frontPage = leaf.querySelector('.book__page--front');
-    const backPage = leaf.querySelector('.book__page--back');
-    /* shadow peaks at mid-flip (0.5) */
-    const shadowIntensity = Math.sin(progress * Math.PI);
-    if (frontPage) frontPage.style.setProperty('--curl', shadowIntensity);
-    if (backPage) backPage.style.setProperty('--curl', shadowIntensity);
-    /* apply via inline style on the pseudo-element workaround */
-    if (frontPage) {
-      frontPage.style.boxShadow = shadowIntensity > 0.05
-        ? `inset ${-40 * shadowIntensity}px 0 ${60 * shadowIntensity}px rgba(0,0,0,${0.15 * shadowIntensity})`
-        : 'none';
-    }
-    if (backPage) {
-      backPage.style.boxShadow = shadowIntensity > 0.05
-        ? `inset ${40 * shadowIntensity}px 0 ${60 * shadowIntensity}px rgba(0,0,0,${0.2 * shadowIntensity})`
-        : 'none';
-    }
-  }
+  /* ── initialize page-flip ── */
+  function initPageFlip() {
+    const maxH = window.innerHeight * 0.8;
+    const ratio = 0.705; /* page width/height ratio (≈ A4-ish) */
 
-  function clearCurlShadow(leaf) {
-    const frontPage = leaf.querySelector('.book__page--front');
-    const backPage = leaf.querySelector('.book__page--back');
-    if (frontPage) frontPage.style.boxShadow = '';
-    if (backPage) backPage.style.boxShadow = '';
-  }
-
-  /* ── animated flip with curl ── */
-  function animateFlip(leaf, fromAngle, toAngle, onDone) {
-    const start = performance.now();
-    const duration = FLIP_DURATION;
-
-    function easeInOutCubic(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
-    function frame(now) {
-      const elapsed = now - start;
-      const t = Math.min(elapsed / duration, 1);
-      const eased = easeInOutCubic(t);
-      const angle = fromAngle + (toAngle - fromAngle) * eased;
-      const progress = Math.abs(angle) / 180;
-
-      leaf.style.transition = 'none';
-      leaf.style.transform = `rotateY(${angle}deg)`;
-      setCurlShadow(leaf, progress);
-
-      if (t < 1) {
-        requestAnimationFrame(frame);
-      } else {
-        leaf.style.transition = '';
-        clearCurlShadow(leaf);
-        if (onDone) onDone();
-      }
-    }
-
-    requestAnimationFrame(frame);
-  }
-
-  /* ── flip helpers ── */
-  function flipForward() {
-    if (flipping || currentPage >= totalLeaves) return;
-    flipping = true;
-    const leaf = leaves[currentPage];
-    leaf.style.zIndex = currentPage + 1;
-    currentPage++;
-    animateFlip(leaf, 0, -180, () => { flipping = false; });
-  }
-
-  function flipBackward() {
-    if (flipping || currentPage <= 0) return;
-    flipping = true;
-    currentPage--;
-    const leaf = leaves[currentPage];
-    leaf.style.zIndex = totalLeaves - currentPage;
-    animateFlip(leaf, -180, 0, () => { flipping = false; });
-  }
-
-  /* ── drag interaction ── */
-  function onPointerDown(e) {
-    if (flipping) return;
-    const rect = book.getBoundingClientRect();
-    const relX = e.clientX - rect.left;
-    const half = rect.width / 2;
-
-    if (relX > half && currentPage < totalLeaves) {
-      dragDirection = 1;
-      dragLeaf = leaves[currentPage];
-    } else if (relX <= half && currentPage > 0) {
-      dragDirection = -1;
-      dragLeaf = leaves[currentPage - 1];
-    } else {
-      return;
-    }
-
-    dragging = true;
-    dragStartX = e.clientX;
-    dragDelta = 0;
-    dragLeaf.classList.add('book__leaf--dragging');
-    e.preventDefault();
-  }
-
-  function onPointerMove(e) {
-    if (!dragging || !dragLeaf) return;
-    dragDelta = e.clientX - dragStartX;
-
-    let angle;
-    const maxDrag = 250;
-    const ratio = Math.min(Math.abs(dragDelta) / maxDrag, 1);
-
-    if (dragDirection === 1) {
-      angle = dragDelta < 0 ? -180 * ratio : 0;
-      dragLeaf.style.zIndex = currentPage + 1;
-    } else {
-      angle = dragDelta > 0 ? -180 + 180 * ratio : -180;
-      dragLeaf.style.zIndex = totalLeaves - (currentPage - 1);
-    }
-    dragLeaf.style.transition = 'none';
-    dragLeaf.style.transform = `rotateY(${angle}deg)`;
-
-    /* live curl shadow */
-    const progress = Math.abs(angle) / 180;
-    setCurlShadow(dragLeaf, progress);
-  }
-
-  function onPointerUp() {
-    if (!dragging || !dragLeaf) return;
-    dragging = false;
-    dragLeaf.classList.remove('book__leaf--dragging');
-
-    const threshold = 60;
-    const shouldFlip = Math.abs(dragDelta) > threshold;
-    const leaf = dragLeaf;
-
-    if (shouldFlip) {
-      if (dragDirection === 1) {
-        leaf.style.zIndex = currentPage + 1;
-        currentPage++;
-        flipping = true;
-        const currentAngle = getCurrentAngle(leaf);
-        animateFlip(leaf, currentAngle, -180, () => { flipping = false; });
-      } else {
-        currentPage--;
-        leaf.style.zIndex = totalLeaves - currentPage;
-        flipping = true;
-        const currentAngle = getCurrentAngle(leaf);
-        animateFlip(leaf, currentAngle, 0, () => { flipping = false; });
+    let pageW, pageH;
+    if (isMobile) {
+      /* two pages must fit side-by-side within 90% of viewport width */
+      const maxTotalW = window.innerWidth * 0.9;
+      pageW = Math.floor(maxTotalW / 2);
+      pageH = Math.round(pageW / ratio);
+      /* clamp to max height */
+      if (pageH > maxH) {
+        pageH = Math.round(maxH);
+        pageW = Math.round(pageH * ratio);
       }
     } else {
-      /* snap back */
-      flipping = true;
-      const currentAngle = getCurrentAngle(leaf);
-      if (dragDirection === 1) {
-        leaf.style.zIndex = totalLeaves - currentPage;
-        animateFlip(leaf, currentAngle, 0, () => { flipping = false; });
-      } else {
-        leaf.style.zIndex = currentPage;
-        animateFlip(leaf, currentAngle, -180, () => { flipping = false; });
-      }
+      pageH = Math.round(maxH);
+      pageW = Math.round(pageH * ratio);
     }
 
-    dragLeaf = null;
-    dragDelta = 0;
-  }
+    pageFlip = new St.PageFlip(bookEl, {
+      width: pageW,
+      height: pageH,
+      size: 'fixed',
+      showCover: true,
+      drawShadow: true,
+      maxShadowOpacity: 0.6,
+      flippingTime: 2000,
+      usePortrait: false,
+      autoSize: true,
+      mobileScrollSupport: false,
+      useMouseEvents: true,
+      startZIndex: 0,
+      swipeDistance: 20,
+      clickEventForward: false,
+      disableFlipByClick: true,
+    });
 
-  function getCurrentAngle(leaf) {
-    const st = getComputedStyle(leaf).transform;
-    if (!st || st === 'none') return 0;
-    const m = st.match(/matrix3d\((.+)\)/);
-    if (m) {
-      const vals = m[1].split(',').map(Number);
-      return Math.round(Math.atan2(-vals[8], vals[0]) * (180 / Math.PI));
-    }
-    const m2 = st.match(/matrix\((.+)\)/);
-    if (m2) {
-      const vals = m2[1].split(',').map(Number);
-      return Math.round(Math.atan2(vals[1], vals[0]) * (180 / Math.PI));
-    }
-    return 0;
+    pageFlip.loadFromHTML(bookEl.querySelectorAll('.book__page'));
   }
 
   /* ── events ── */
+  function onClose(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    close();
+  }
+
   function bindEvents() {
-    closeBtn.addEventListener('click', close);
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) close();
-    });
-    prevBtn.addEventListener('click', flipBackward);
-    nextBtn.addEventListener('click', flipForward);
-
+    /* use pointerdown + touchstart to fire before StPageFlip intercepts */
+    closeBtn.addEventListener('pointerdown', onClose, true);
+    closeBtn.addEventListener('touchstart', onClose, true);
+    overlay.addEventListener('click', onOverlayClick);
+    prevBtn.addEventListener('click', flipPrev);
+    nextBtn.addEventListener('click', flipNext);
     document.addEventListener('keydown', onKey);
-
-    book.addEventListener('pointerdown', onPointerDown);
-    window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('pointerup', onPointerUp);
   }
 
   function unbindEvents() {
     document.removeEventListener('keydown', onKey);
-    window.removeEventListener('pointermove', onPointerMove);
-    window.removeEventListener('pointerup', onPointerUp);
+    overlay.removeEventListener('click', onOverlayClick);
+    closeBtn.removeEventListener('pointerdown', onClose, true);
+    closeBtn.removeEventListener('touchstart', onClose, true);
+  }
+
+  function onOverlayClick(e) {
+    if (e.target === overlay) close();
+  }
+
+  function flipNext() {
+    if (pageFlip) pageFlip.flipNext();
+  }
+
+  function flipPrev() {
+    if (pageFlip) pageFlip.flipPrev();
   }
 
   function onKey(e) {
     if (e.key === 'Escape') close();
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') flipForward();
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') flipBackward();
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') flipNext();
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') flipPrev();
   }
 
   /* ── public API ── */
   function open(pages) {
-    currentPage = 0;
-    flipping = false;
-    dragging = false;
     buildDOM(pages);
     bindEvents();
     requestAnimationFrame(() => {
       overlay.classList.add('book-overlay--visible');
+      /* small delay so the overlay is visible before page-flip measures */
+      setTimeout(initPageFlip, 60);
     });
     document.body.style.overflow = 'hidden';
+    /* hide custom cursor so the default browser cursor is visible on the overlay */
     const cursor = document.querySelector('.custom-cursor');
-    if (cursor) cursor.classList.add('custom-cursor--inverted');
+    if (cursor) cursor.style.display = 'none';
   }
 
+  let closing = false;
   function close() {
-    overlay.classList.remove('book-overlay--visible');
+    if (closing) return;
+    closing = true;
     unbindEvents();
+    /* remove overlay from DOM first — nothing visible after this line */
+    if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    document.body.style.overflow = '';
     const cursor = document.querySelector('.custom-cursor');
-    if (cursor) cursor.classList.remove('custom-cursor--inverted');
-    setTimeout(() => {
-      overlay.remove();
-      document.body.style.overflow = '';
-    }, 350);
+    if (cursor) cursor.style.display = '';
+    /* destroy on detached nodes so any visual reset is invisible */
+    const pf = pageFlip;
+    pageFlip = null;
+    closing = false;
+    if (pf) setTimeout(() => { try { pf.destroy(); } catch (e) { /* silent */ } }, 0);
   }
 
   return { open, close };
