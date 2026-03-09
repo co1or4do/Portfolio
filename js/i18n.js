@@ -271,6 +271,7 @@ function applyTranslations(lang) {
   if (!t) return;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
+    if (el.dataset.typewriting) return;
     const key = el.getAttribute('data-i18n');
     if (t[key] !== undefined) {
       el.innerHTML = t[key];
@@ -296,9 +297,35 @@ function toggleLang() {
   applyTranslations(currentLang);
 }
 
+function heroTypewriter() {
+  if (window.innerWidth > 743) return;
+  var el = document.querySelector('.hero-desc');
+  if (!el) return;
+  var text = el.textContent;
+  var h = el.offsetHeight;
+
+  el.dataset.typewriting = '1';
+  el.style.minHeight = h + 'px';
+  el.textContent = '';
+
+  var i = 0;
+  function type() {
+    if (i < text.length) {
+      i++;
+      el.textContent = text.slice(0, i);
+      setTimeout(type, 25);
+    } else {
+      delete el.dataset.typewriting;
+      el.style.minHeight = '';
+    }
+  }
+  type();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.lang-toggle').forEach(btn => {
     btn.addEventListener('click', toggleLang);
   });
   applyTranslations(currentLang);
+  heroTypewriter();
 });

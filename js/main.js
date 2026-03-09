@@ -928,3 +928,4 @@ document.querySelectorAll('.navbar__link').forEach(link => {
     });
   });
 })();
+
