@@ -119,19 +119,21 @@
 
     cycleTimer = setTimeout(cycle, 15000);
   } else {
-    // Desktop: hover-based glitch
-    nameEl.addEventListener('mouseenter', () => {
-      clearTimeout(restoreTimer);
-      cancelFlag = true;
-      setTimeout(() => glitchTransition(nameEl.textContent, targetText), 10);
-    });
+    // Desktop: toggle on hover — first pass → "Colo", next pass → full name
+    let showingOriginal = true;
+    let transitioning = false;
 
-    nameEl.addEventListener('mouseleave', () => {
-      clearTimeout(restoreTimer);
+    nameEl.addEventListener('mouseenter', () => {
+      if (transitioning) return;
+      transitioning = true;
       cancelFlag = true;
-      restoreTimer = setTimeout(() => {
-        glitchTransition(nameEl.textContent, originalText);
-      }, 200);
+      const to = showingOriginal ? targetText : originalText;
+      setTimeout(() => {
+        glitchTransition(nameEl.textContent, to, () => {
+          showingOriginal = !showingOriginal;
+          transitioning = false;
+        });
+      }, 10);
     });
   }
 })();
@@ -592,7 +594,7 @@ document.querySelectorAll('.navbar__link').forEach(link => {
         }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -32px 0px' }
+    { threshold: 0, rootMargin: '0px 0px -32px 0px' }
   );
 
   document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
@@ -903,9 +905,10 @@ document.querySelectorAll('.navbar__link').forEach(link => {
   const img = overlay.querySelector('.lightbox__img');
   const closeBtn = overlay.querySelector('.lightbox__close');
 
-  function open(src, alt) {
+  function open(src, alt, filter) {
     img.src = src;
     img.alt = alt || '';
+    img.style.filter = filter || '';
     requestAnimationFrame(() => overlay.classList.add('lightbox--open'));
     document.body.style.overflow = 'hidden';
   }
@@ -924,7 +927,8 @@ document.querySelectorAll('.navbar__link').forEach(link => {
 
   document.querySelectorAll('.pd-gallery__item img, .pd-intro__right img, .pd-prose img').forEach(function (el) {
     el.addEventListener('click', function () {
-      open(el.src, el.alt);
+      var computedFilter = window.getComputedStyle(el).filter;
+      open(el.src, el.alt, computedFilter !== 'none' ? computedFilter : '');
     });
   });
 })();

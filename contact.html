@@ -83,9 +83,7 @@
       </div>
     </div>
     <div class="contact-split__right">
-      <video autoplay loop muted playsinline>
-        <source src="Fotos/WhatsApp%20Video%202026-03-06%20at%2016.46.08.mp4" type="video/mp4">
-      </video>
+      <img src="Fotos/get%20in%20touch.gif" alt="Get in touch">
     </div>
   </section>
 
@@ -114,5 +112,21 @@
 
   <script defer src="js/main.js"></script>
   <script defer src="js/i18n.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const icons = document.querySelectorAll('.contact-item__icon');
+      const sound = new Audio('freesound_community-gameboy-pluck-41265.mp3');
+      sound.volume = 0.21;
+
+      icons.forEach(icon => {
+        icon.addEventListener('mouseenter', () => {
+          const s = sound.cloneNode();
+          s.volume = 0.21;
+          s.playbackRate = 1.2;
+          s.play().catch(() => {});
+        });
+      });
+    });
+  </script>
 </body>
 </html>

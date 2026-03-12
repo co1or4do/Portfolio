@@ -53,10 +53,7 @@
     <!-- Hero — sticky: photo + quote side by side, full width -->
     <div class="about-hero">
       <div class="about-hero__left">
-        <picture>
-              <source srcset="Fotos/fotofacha.webp" type="image/webp">
-              <img src="Fotos/fotofacha.jpeg" alt="José Manuel Diaz Herrera" width="1200" height="1200">
-            </picture>
+                      <img src="Fotos/fotofacha.jpeg" alt="José Manuel Diaz Herrera" width="1200" height="1200">
       </div>
       <div class="about-hero__right">
         <div class="about-quote-wrap">
@@ -68,40 +65,64 @@
       </div>
     </div>
 
-    <!-- Bio + Disciplines — scroll over the sticky hero -->
+    <!-- CV — scroll over the sticky hero -->
     <div class="about-below">
-      <div class="about-bio">
-        <div class="about-bio__section">
-          <h2 class="about-bio__title" data-i18n="about-bio-title-1">Education</h2>
-          <p data-i18n="about-bio-2a">
-            I'm a multimedia designer, originally from and based in Buenos Aires. I hold a Bachelor's degree in Design from Universidad Torcuato Di Tella. My studies taught me to truly think through problems, to go beyond aesthetics and find solutions that work.
-          </p>
-          <p data-i18n="about-bio-2b">
-            Throughout my studies I discovered a strong passion for industrial design, digital communication and the creation of multimedia objects.
-          </p>
+      <div class="about-cv about-cv--grid">
+        <div class="about-cv__section">
+          <h2 class="about-cv__heading" data-i18n="about-cv-experience">Work Experience</h2>
+
+          <div class="about-cv__entry">
+            <p class="about-cv__role" data-i18n="about-cv-role-1">Community Manager</p>
+            <p class="about-cv__place" data-i18n="about-cv-place-1">Deco Macetas Home | Jan 2024 – Aug 2024</p>
+          </div>
+
+          <div class="about-cv__entry">
+            <p class="about-cv__role" data-i18n="about-cv-role-2">Designer & Community Manager</p>
+            <p class="about-cv__place" data-i18n="about-cv-place-2">Mercado de Helados | Aug 2025 – Present</p>
+          </div>
         </div>
-        <div class="about-bio__section">
-          <h2 class="about-bio__title" data-i18n="about-bio-title-2">Career</h2>
-          <p data-i18n="about-bio-3a">
-            Since 2024 I've worked as a Community Manager and Graphic Designer, which immersed me fully in the digital world: social media, communities and content.
-          </p>
-          <p data-i18n="about-bio-3b">
-            That allowed me to put what I learned into practice and grow professionally in the digital space.
-          </p>
+
+        <div class="about-cv__section">
+          <h2 class="about-cv__heading" data-i18n="about-cv-education">Education</h2>
+
+          <div class="about-cv__entry">
+            <p class="about-cv__role">Universidad Torcuato Di Tella</p>
+            <p class="about-cv__place" data-i18n="about-cv-edu-1">Bachelor's in Design | 2022 – 2025</p>
+          </div>
+
+          <div class="about-cv__entry">
+            <p class="about-cv__role">Colegio Cardenal Newman</p>
+            <p class="about-cv__place" data-i18n="about-cv-edu-2">High School Diploma | Graduated in 2020</p>
+          </div>
         </div>
       </div>
 
-      <div class="about-disciplines">
-        <p class="about-disciplines__label" data-i18n="disciplines-label">Disciplines</p>
-        <ul class="about-disciplines__list">
-          <li class="about-disciplines__item" data-i18n="disc-industrial">Industrial Design</li>
-          <li class="about-disciplines__item" data-i18n="disc-3d">3D Design</li>
-          <li class="about-disciplines__item" data-i18n="disc-product">Product Design</li>
-          <li class="about-disciplines__item" data-i18n="disc-game">Game Design</li>
-          <li class="about-disciplines__item" data-i18n="disc-comm">Communication Design</li>
-          <li class="about-disciplines__item" data-i18n="disc-digital">Digital Design</li>
-          <li class="about-disciplines__item" data-i18n="disc-ia">IA Design</li>
-        </ul>
+      <div class="about-cv about-cv--grid">
+        <div class="about-cv__section">
+          <h2 class="about-cv__heading" data-i18n="about-cv-skills">Skills</h2>
+          <ul class="about-cv__tags">
+            <li data-i18n="skill-graphic">Graphic Design</li>
+            <li data-i18n="skill-industrial">Industrial Design</li>
+            <li data-i18n="skill-product">Product Design</li>
+            <li data-i18n="skill-audiovisual">Audiovisual Design</li>
+            <li data-i18n="skill-communication">Digital Communication</li>
+            <li>Vibe Coding</li>
+          </ul>
+        </div>
+
+        <div class="about-cv__section">
+          <h2 class="about-cv__heading" data-i18n="tools-label">Tools</h2>
+          <ul class="about-cv__tags">
+            <li>Illustrator</li>
+            <li>Figma</li>
+            <li>Claude Code</li>
+            <li>Blender</li>
+            <li>Photoshop</li>
+            <li>After Effects</li>
+            <li>Premiere</li>
+            <li>Meta Ads</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
